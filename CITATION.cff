@@ -1,0 +1,43 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite the accompanying paper."
+type: software
+title: "InsightToast"
+abstract: >-
+  Real-time multi-agentic RAG pipeline and mixed-initiative interface that
+  monitors verbal discourse, detects topics and informational needs as they
+  emerge, and proactively retrieves and surfaces source-grounded insights
+  as glanceable text and interactive charts.
+authors:
+  - family-names: Abolnejadian
+    given-names: Mohammad
+    orcid: "https://orcid.org/0000-0003-2028-9270"
+    affiliation: "University of Waterloo"
+  - family-names: Brehmer
+    given-names: Matthew
+    orcid: "https://orcid.org/0000-0001-5524-2291"
+    affiliation: "University of Waterloo"
+repository-code: "https://github.com/ubixgroup/InsightToast"
+license: MIT
+preferred-citation:
+  type: conference-paper
+  title: "InsightToast: Proactive Information Retrieval & Glanceable Visualization in the Side Channel of Data-Rich Meetings"
+  authors:
+    - family-names: Abolnejadian
+      given-names: Mohammad
+      orcid: "https://orcid.org/0000-0003-2028-9270"
+      affiliation: "University of Waterloo"
+    - family-names: Brehmer
+      given-names: Matthew
+      orcid: "https://orcid.org/0000-0001-5524-2291"
+      affiliation: "University of Waterloo"
+  year: 2026
+  doi: "10.1145/3830398.3830522"
+  isbn: "979-8-4007-2856-3"
+  publisher:
+    name: "Association for Computing Machinery"
+  conference:
+    name: "The 39th Annual ACM Symposium on User Interface Software and Technology (UIST '26)"
+  collection-title: "Proceedings of the 39th Annual ACM Symposium on User Interface Software and Technology"
+  location: "Detroit, MI, USA"
+  start: "2026-11-02"
+  end: "2026-11-05"

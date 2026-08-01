@@ -1,0 +1,112 @@
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    container_name: insighttoast-api
+    restart: unless-stopped
+    init: true
+    env_file:
+      - .env
+    environment:
+      QDRANT_URL: ${QDRANT_URL:-http://qdrant:6333}
+      OLLAMA_BASE_URL: ${OLLAMA_BASE_URL:-http://ollama:11434}
+      API_APP_MODULE: ${API_APP_MODULE:-API.main:app}
+    ports:
+      - "${API_HOST_PORT:-4343}:4343"
+    depends_on:
+      qdrant:
+        condition: service_started
+      ollama:
+        condition: service_healthy
+      ollama-init:
+        condition: service_completed_successfully
+    volumes:
+      - ./session_dumps:/app/session_dumps
+      - "./study logs:/app/study logs"
+    command: >
+      python -m uvicorn ${API_APP_MODULE:-API.main:app} --host 0.0.0.0 --port 4343
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "python",
+          "-c",
+          "import urllib.request; urllib.request.urlopen('http://localhost:4343/health', timeout=5)",
+        ]
+      interval: 40s
+      timeout: 10s
+      retries: 5
+      start_period: 20s
+    networks:
+      - insighttoast-backend
+
+  qdrant:
+    image: qdrant/qdrant:v1.13.6
+    container_name: insighttoast-qdrant
+    restart: unless-stopped
+    ports:
+      - "${QDRANT_HOST_PORT:-6333}:6333"
+    volumes:
+      - ./qdrant_storage:/qdrant/storage
+    networks:
+      - insighttoast-backend
+
+  ollama:
+    image: ollama/ollama:latest
+    container_name: insighttoast-ollama
+    restart: unless-stopped
+    ports:
+      - "${OLLAMA_HOST_PORT:-11435}:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+    healthcheck:
+      test: ["CMD", "ollama", "list"]
+      interval: 30s
+      timeout: 10s
+      retries: 10
+      start_period: 30s
+    networks:
+      - insighttoast-backend
+
+  ollama-init:
+    image: ollama/ollama:latest
+    container_name: insighttoast-ollama-init
+    depends_on:
+      ollama:
+        condition: service_healthy
+    entrypoint: ["/bin/sh", "-c"]
+    command:
+      - |
+        set -eu
+
+        retry_cmd() {
+          max_attempts="$$1"
+          shift
+          attempt=1
+          while [ "$$attempt" -le "$$max_attempts" ]; do
+            if "$$@"; then
+              return 0
+            fi
+            echo "Attempt $$attempt/$$max_attempts failed: $$*"
+            sleep 2
+            attempt=$$((attempt + 1))
+          done
+          return 1
+        }
+
+        retry_cmd 45 ollama list
+        retry_cmd 5 ollama pull ${OLLAMA_EMBEDDING_MODEL:-embeddinggemma:latest}
+        retry_cmd 5 ollama pull ${OLLAMA_MAIN_MODEL:-gemma3:12b}
+    environment:
+      OLLAMA_HOST: http://ollama:11434
+    networks:
+      - insighttoast-backend
+    restart: "no"
+
+volumes:
+  ollama_data:
+
+networks:
+  insighttoast-backend:
+    name: insighttoast-backend

@@ -1,0 +1,1502 @@
+{
+    "procedural_check": [
+        {
+            "input": {
+                "transcript_chunk": "Let's take a 5-minute break.",
+                "last_n_chunks": "Speaker A: We've covered the main points on the carbon tax proposal.\nSpeaker B: I agree, the agricultural exemptions are well-defined."
+            },
+            "output": {
+                "is_procedural": true,
+                "reasoning": "Meeting logistics - break announcement with no substantive discussion content. Rule 1 applies: clearly procedural."
+            }
+        },
+        {
+            "input": {
+                "transcript_chunk": "Can everyone hear me okay? Is my microphone working?",
+                "last_n_chunks": "Speaker C: The budget allocation needs review.\nSpeaker D: Yes, especially the infrastructure funding."
+            },
+            "output": {
+                "is_procedural": true,
+                "reasoning": "Technical/audio check with no meaningful discussion content. Category 4: Technical and Audio/Visual Issues."
+            }
+        },
+        {
+            "input": {
+                "transcript_chunk": "Good morning everyone, let's begin today's session.",
+                "last_n_chunks": "No previous conversation."
+            },
+            "output": {
+                "is_procedural": true,
+                "reasoning": "Opening greeting combined with session management statement. Categories 1 and 3: No substantive content."
+            }
+        },
+        {
+            "input": {
+                "transcript_chunk": "My name is Dr. Sarah Chen and I'm a senior researcher at the Climate Policy Institute where I've been working on carbon pricing mechanisms for the past eight years.",
+                "last_n_chunks": "Speaker A: Let me introduce our expert witness.\nSpeaker B: Welcome, please tell us about yourself."
+            },
+            "output": {
+                "is_procedural": true,
+                "reasoning": "Pure self-introduction with credentials but no substantive policy content. Category 2: Introductions. Rule 5 applies - even lengthy introductions without substantive framing are filtered."
+            }
+        },
+        {
+            "input": {
+                "transcript_chunk": "I agree.",
+                "last_n_chunks": "Speaker A: The carbon tax needs reform.\nSpeaker B: We should consider agricultural exemptions.\nSpeaker C: That would help farmers significantly."
+            },
+            "output": {
+                "is_procedural": true,
+                "reasoning": "Pure acknowledgment with no explanation or new information. Category 5: Simple agreement without content. Rule 1 applies."
+            }
+        },
+        {
+            "input": {
+                "transcript_chunk": "Thank you. I appreciate your input on this matter.",
+                "last_n_chunks": "Speaker A: The environmental impact must be considered alongside economic factors.\nSpeaker B: We need a balanced approach."
+            },
+            "output": {
+                "is_procedural": true,
+                "reasoning": "Gratitude and acknowledgment without substantive content. Category 1: Pleasantries and Category 5: Acknowledgments."
+            }
+        }
+    ],
+    "topic_detector": [
+        {
+            "input": {
+                "meeting_title": "Environmental Policy Committee",
+                "meeting_summary": "Discussion of environmental regulations and carbon pricing mechanisms for the upcoming fiscal year.",
+                "ongoing_topic_info": "Environmental Policy Reform (ID: env_policy_001)",
+                "transcript_chunk": "The proposed carbon pricing mechanism would establish a baseline at $50 per ton of CO2 emissions.",
+                "last_n_chunks": "Speaker A: We're discussing environmental policy reforms this quarter.\nSpeaker B: Carbon taxation has been a contentious issue across jurisdictions.\nSpeaker C: The industrial sector has raised concerns about compliance costs.",
+                "all_topics_info": "### Environmental Policy Reform (ID: env_policy_001)\nDescription: Discussion of environmental regulations, carbon pricing, emissions standards, and related policy frameworks. This topic INCLUDES carbon tax mechanisms, cap-and-trade systems, and emissions reporting requirements. It EXCLUDES specific sectoral regulations (e.g., transportation emissions standards) which should be separate topics.\nExample chunks:\n- We're discussing environmental policy reforms this quarter.\n- Carbon taxation has been a contentious issue across jurisdictions.\n- The industrial sector has raised concerns about compliance costs."
+            },
+            "output": {
+                "action": "ASSIGN_TOPIC",
+                "topic_id": "env_policy_001",
+                "topic_name": null,
+                "topic_description": null,
+                "reasoning": "The chunk continues the discussion of carbon pricing within the existing Environmental Policy Reform topic, maintaining high consistency with previous chunks and the ongoing topic."
+            }
+        },
+        {
+            "input": {
+                "meeting_title": "Environmental Policy Committee",
+                "meeting_summary": "Discussion of environmental regulations and budget allocation for the upcoming fiscal year.",
+                "ongoing_topic_info": "Environmental Policy Reform (ID: env_policy_001)",
+                "transcript_chunk": "Moving to our budget discussion, we need to address the $2 million shortfall in operational expenses.",
+                "last_n_chunks": "Speaker A: Carbon taxation has been a contentious issue.\nSpeaker B: The industrial sector raised compliance concerns.",
+                "all_topics_info": "### Environmental Policy Reform (ID: env_policy_001)\nDescription: Discussion of environmental regulations and carbon pricing mechanisms. This topic INCLUDES carbon tax mechanisms and emissions standards. It EXCLUDES budget and financial planning matters.\nExample chunks:\n- Carbon taxation has been a contentious issue.\n- The industrial sector raised compliance concerns."
+            },
+            "output": {
+                "action": "CREATE_TOPIC",
+                "topic_id": null,
+                "topic_name": "Budget and Financial Planning",
+                "topic_description": "Discussion of budgetary matters, financial shortfalls, operational expenses, and fiscal planning for the committee and its initiatives. This topic INCLUDES budget allocation, revenue projections, cost analysis, and financial reporting. It EXCLUDES policy-specific funding discussions that should remain with their respective policy topics.",
+                "reasoning": "This represents a clear topic shift from environmental policy to budget matters. The ongoing topic is Environmental Policy Reform but this chunk is about budget shortfalls, which does not fit within the environmental policy topic based on its explicit exclusion criteria. Requires new topic creation."
+            }
+        },
+        {
+            "input": {
+                "meeting_title": "Facilities Management Meeting",
+                "meeting_summary": "Planning for building upgrades and energy efficiency improvements.",
+                "ongoing_topic_info": "Infrastructure Improvement (ID: infra_001)",
+                "transcript_chunk": "The LED lighting systems would reduce our energy consumption by approximately 40%.",
+                "last_n_chunks": "Speaker A: We should explore energy-efficient building upgrades.\nSpeaker B: The HVAC system needs modernization.",
+                "all_topics_info": "### Infrastructure Improvement (ID: infra_001)\nDescription: Discussion of building upgrades, facility improvements, and modernization projects. This topic INCLUDES energy-efficient upgrades, HVAC modernization, lighting systems, and structural improvements. It EXCLUDES procurement processes and vendor selection which should be tracked separately.\nExample chunks:\n- We should explore energy-efficient building upgrades.\n- The HVAC system needs modernization."
+            },
+            "output": {
+                "action": "ASSIGN_TOPIC",
+                "topic_id": "infra_001",
+                "topic_name": null,
+                "topic_description": null,
+                "reasoning": "LED lighting discussion fits naturally within the existing Infrastructure Improvement ongoing topic as it's part of energy-efficient building upgrades explicitly included in the topic description. Maintains consistency with the ongoing discussion."
+            }
+        },
+        {
+            "input": {
+                "meeting_title": "Facilities Management Meeting",
+                "meeting_summary": "Planning for building upgrades, procurement processes, and vendor evaluation.",
+                "ongoing_topic_info": "Infrastructure Improvement (ID: infra_001)",
+                "transcript_chunk": "However, the procurement process for these lighting systems requires competitive bidding and vendor evaluation.",
+                "last_n_chunks": "Speaker A: The LED lighting systems would reduce energy consumption by 40%.\nSpeaker B: We should explore energy-efficient building upgrades.",
+                "all_topics_info": "### Infrastructure Improvement (ID: infra_001)\nDescription: Discussion of building upgrades and modernization projects. This topic INCLUDES energy-efficient upgrades and lighting systems. It EXCLUDES procurement processes and vendor selection.\nExample chunks:\n- The LED lighting systems would reduce energy consumption by 40%.\n- We should explore energy-efficient building upgrades.\n\n### Budget and Financial Planning (ID: budget_001)\nDescription: Discussion of budgetary matters and fiscal planning. This topic INCLUDES budget allocation and cost analysis. It EXCLUDES procurement procedures.\nExample chunks:\n- We need to address the $2 million shortfall in operational expenses."
+            },
+            "output": {
+                "action": "CREATE_TOPIC",
+                "topic_id": null,
+                "topic_name": "Procurement Procedures",
+                "topic_description": "Discussion of procurement processes, competitive bidding, vendor evaluation, and acquisition policies. This topic INCLUDES tender processes, vendor selection criteria, compliance requirements, and contract negotiations. It EXCLUDES the technical specifications of items being procured, which should remain with their respective technical topics.",
+                "reasoning": "While related to the lighting context from the ongoing Infrastructure Improvement topic, this chunk shifts focus to procurement procedures. The Infrastructure Improvement topic explicitly EXCLUDES procurement processes, so this requires a new topic to track the distinct administrative process of vendor selection and competitive bidding."
+            }
+        }
+    ],
+    "meeting_tracker": [
+        {
+            "input": {
+                "transcript_chunk": "Today we're discussing the proposed amendments to the telecommunications regulatory framework.",
+                "last_n_chunks": "No previous conversation.",
+                "current_meeting_info": {
+                    "title": "",
+                    "summary": "",
+                    "key_values": {}
+                }
+            },
+            "output": {
+                "title": "Telecommunications Regulatory Framework Amendments",
+                "summary": "Meeting initiated to discuss proposed amendments to the telecommunications regulatory framework.",
+                "key_values": {}
+            }
+        },
+        {
+            "input": {
+                "transcript_chunk": "The committee voted 8-2 in favor of the motion to proceed with the revised proposal.",
+                "last_n_chunks": "Speaker A: We need to finalize the budget allocation.\nSpeaker B: The revised proposal addresses our concerns.",
+                "current_meeting_info": {
+                    "title": "Budget Allocation Review",
+                    "summary": "Discussion of budget allocation priorities for the upcoming fiscal year.",
+                    "key_values": {}
+                }
+            },
+            "output": {
+                "title": "Budget Allocation Review",
+                "summary": "The committee voted 8-2 in favor of proceeding with the revised budget proposal.",
+                "key_values": {
+                    "Committee Vote": "8-2 in favor",
+                    "Decision": "Proceed with revised proposal",
+                    "Speaker:A": "Advocates for finalizing budget allocation",
+                    "Speaker:B": "Supports revised proposal, says it addresses concerns"
+                }
+            }
+        },
+        {
+            "input": {
+                "transcript_chunk": "I believe we should postpone this decision until next quarter when we have more data.",
+                "last_n_chunks": "Speaker C: The data privacy implications are significant.\nSpeaker D: We need comprehensive analysis before deciding.",
+                "current_meeting_info": {
+                    "title": "Data Privacy Policy Update",
+                    "summary": "Review of data privacy policies in light of new regulations.",
+                    "key_values": {
+                        "Previous Decision": "Form working group"
+                    }
+                }
+            },
+            "output": {
+                "title": "Data Privacy Policy Update",
+                "summary": "Proposal made to postpone decision to next quarter pending additional data availability.",
+                "key_values": {
+                    "Speaker:C": "Emphasizes significant data privacy implications",
+                    "Speaker:D": "Advocates for comprehensive analysis before deciding"
+                }
+            }
+        },
+        {
+            "input": {
+                "transcript_chunk": "That's a good point about the timeline.",
+                "last_n_chunks": "Speaker A: The infrastructure upgrades need to be completed by Q2.\nSpeaker B: Resource allocation is the main challenge.",
+                "current_meeting_info": {
+                    "title": "Infrastructure Modernization Plan",
+                    "summary": "Discussion of infrastructure upgrade timelines and resource allocation.",
+                    "key_values": {}
+                }
+            },
+            "output": {
+                "title": null,
+                "summary": null,
+                "key_values": {}
+            }
+        },
+        {
+            "input": {
+                "transcript_chunk": "The implementation deadline is set for December 31, 2025, with quarterly progress reviews starting in March 2025.",
+                "last_n_chunks": "Speaker C: We need clear milestones for the integration project.\nSpeaker D: Quarterly reviews will help track progress.",
+                "current_meeting_info": {
+                    "title": "System Integration Project",
+                    "summary": "Planning for new system integration across departments.",
+                    "key_values": {
+                        "Speaker:C": "Focused on milestone clarity for integration project"
+                    }
+                }
+            },
+            "output": {
+                "title": "System Integration Project",
+                "summary": "Implementation deadline established for December 31, 2025, with quarterly progress reviews beginning March 2025.",
+                "key_values": {
+                    "Implementation Deadline": "December 31, 2025",
+                    "Progress Reviews": "Quarterly starting March 2025",
+                    "Speaker:D": "Supports quarterly reviews for progress tracking"
+                }
+            }
+        }
+    ],
+    "topic_description_updater": [
+        {
+            "input": {
+                "topic_id": "healthcare_001",
+                "topic_name": "Healthcare Resource Allocation",
+                "current_description": "Discussion of healthcare resource distribution.",
+                "current_examples": "- Rural hospitals need more funding\n- Medical equipment is outdated",
+                "new_chunk": "The emergency department wait times have increased by 45% due to staffing shortages.",
+                "new_chunk_id": "seg_new_123"
+            },
+            "output": {
+                "updated_description": "Discussion of healthcare resource distribution, funding allocation, staffing levels, and infrastructure needs across healthcare facilities.",
+                "example_segment_ids": [
+                    "seg_new_123",
+                    "seg_001",
+                    "seg_002"
+                ],
+                "reasoning": "Added staffing and wait times to description. New chunk provides specific metrics about staffing impact, making it a strong example. Placed first as most recent and detailed."
+            }
+        },
+        {
+            "input": {
+                "topic_id": "budget_002",
+                "topic_name": "Budget Planning",
+                "current_description": "Budget and fiscal planning discussions.",
+                "current_examples": "- We have a $2M shortfall\n- Need to cut operational costs\n- Revenue projections look optimistic\n- The finance team recommends reserves\n- Quarterly expenses are up 15%",
+                "new_chunk": "I agree with the previous point.",
+                "new_chunk_id": "seg_new_456"
+            },
+            "output": {
+                "updated_description": "Budget and fiscal planning discussions.",
+                "example_segment_ids": [
+                    "seg_001",
+                    "seg_002",
+                    "seg_003",
+                    "seg_004",
+                    "seg_005"
+                ],
+                "reasoning": "New chunk is too generic and adds no value. Existing examples already provide good coverage of budget topics. No updates needed."
+            }
+        },
+        {
+            "input": {
+                "topic_id": "env_policy_003",
+                "topic_name": "Environmental Policy",
+                "current_description": "Environmental regulations and policies.",
+                "current_examples": "- Carbon tax rates need review",
+                "new_chunk": "The comprehensive emissions trading system would create market incentives for reducing greenhouse gas outputs while maintaining industrial competitiveness through phased implementation.",
+                "new_chunk_id": "seg_new_789"
+            },
+            "output": {
+                "updated_description": "Environmental regulations and policies including emissions control, carbon pricing mechanisms, and market-based incentive systems.",
+                "example_segment_ids": [
+                    "seg_new_789",
+                    "seg_001"
+                ],
+                "reasoning": "Enhanced description to include emissions trading and market incentives. New chunk is highly detailed and informative, making it an excellent example despite length. Added as first example."
+            }
+        },
+        {
+            "input": {
+                "topic_id": "tech_upgrade_001",
+                "topic_name": "Technology Upgrades",
+                "current_description": "Technology infrastructure improvements.",
+                "current_examples": "- Server capacity needs doubling\n- Cloud migration timeline approved\n- Legacy systems being phased out\n- Cybersecurity audit recommended\n- Network bandwidth insufficient",
+                "new_chunk": "The new API gateway will improve system integration.",
+                "new_chunk_id": "seg_new_012"
+            },
+            "output": {
+                "updated_description": "Technology infrastructure improvements including server upgrades, cloud migration, legacy system modernization, security enhancements, and system integration.",
+                "example_segment_ids": [
+                    "seg_new_012",
+                    "seg_002",
+                    "seg_003",
+                    "seg_004",
+                    "seg_005"
+                ],
+                "reasoning": "Added system integration to description. New chunk about API gateway provides good specificity and complements existing examples. Replaced least specific example (server capacity)."
+            }
+        }
+    ],
+    "insight_need_assessment": [
+        {
+            "input": {
+                "current_chunk": "I'm not sure how we handled the carbon tax issue last session. Do you know what the voting pattern was?",
+                "last_n_chunks": [
+                    "We need to address the carbon tax policy again.",
+                    "The agricultural sector has concerns.",
+                    "Let's discuss the environmental impact.",
+                    "What are the economic implications?",
+                    "We should review the previous discussions."
+                ],
+                "existing_insights": "No insights generated for recent chunks.",
+                "current_topic": "Carbon Tax Policy",
+                "meeting_summary": "Discussion about carbon tax policy and its impacts on various sectors."
+            },
+            "output": {
+                "insight_needed": true,
+                "reasoning": "Clear uncertainty ('I'm not sure') and direct information request about historical voting patterns. Speaker explicitly asks about past session data. An insight with historical voting records would directly address this need."
+            }
+        },
+        {
+            "input": {
+                "current_chunk": "We should also consider what happened in the previous debate on this bill. Maybe there's something we're missing.",
+                "last_n_chunks": [
+                    "Bill C-45 proposes new environmental regulations.",
+                    "The committee has reviewed the initial draft.",
+                    "There are concerns about implementation costs.",
+                    "Industry stakeholders have provided feedback.",
+                    "The timeline is quite aggressive."
+                ],
+                "existing_insights": "No insights generated for recent chunks.",
+                "current_topic": "Bill C-45 Discussion",
+                "meeting_summary": "Review of Bill C-45 and its proposed environmental regulations."
+            },
+            "output": {
+                "insight_needed": true,
+                "reasoning": "Speaker uses 'should also consider' and 'maybe' indicating uncertainty and need for additional context. Explicit reference to 'previous debate' suggests need for historical information that would be in the knowledge base."
+            }
+        },
+        {
+            "input": {
+                "current_chunk": "The committee voted on this last week and approved the motion unanimously.",
+                "last_n_chunks": [
+                    "We need to finalize the committee report.",
+                    "The motion has been discussed extensively.",
+                    "All stakeholders have been consulted.",
+                    "There are no outstanding concerns.",
+                    "Let's move forward with the decision."
+                ],
+                "existing_insights": "No insights generated for recent chunks.",
+                "current_topic": "Committee Report Finalization",
+                "meeting_summary": "Finalizing committee report after extensive stakeholder consultation."
+            },
+            "output": {
+                "insight_needed": false,
+                "reasoning": "Statement is declarative and factual about recent committee action. No uncertainty, no information requests, no knowledge gaps. The speaker is providing information, not seeking it."
+            }
+        },
+        {
+            "input": {
+                "current_chunk": "I agree with the previous speakers. This is a good approach.",
+                "last_n_chunks": [
+                    "We should adopt the phased implementation strategy.",
+                    "The budget has been approved for this initiative.",
+                    "Timeline looks reasonable given the constraints.",
+                    "Stakeholders are supportive of this approach.",
+                    "Risk mitigation plans are in place."
+                ],
+                "existing_insights": "Insight #1 (3 chunks ago): Phased implementation was used successfully in Bill C-30 with 85% success rate [[SOURCE:committee-report:42-1:ENVI-15]]",
+                "current_topic": "Implementation Strategy",
+                "meeting_summary": "Planning implementation strategy for new policy initiative with phased approach."
+            },
+            "output": {
+                "insight_needed": false,
+                "reasoning": "Pure acknowledgment statement with no substantive content. No uncertainty, no information needs. Recent insight already provides relevant historical context about phased implementation."
+            }
+        },
+        {
+            "input": {
+                "current_chunk": "This debate seems to be going in circles. We need concrete data on how this policy affected employment rates historically.",
+                "last_n_chunks": [
+                    "I think this might impact job creation negatively.",
+                    "But others argue it could stimulate green jobs.",
+                    "We've discussed this several times already.",
+                    "The economic models are unclear.",
+                    "Perhaps we need to reconsider the assumptions."
+                ],
+                "existing_insights": "No insights generated for recent chunks.",
+                "current_topic": "Economic Impact Assessment",
+                "meeting_summary": "Analyzing economic impacts of proposed environmental policy on employment."
+            },
+            "output": {
+                "insight_needed": true,
+                "reasoning": "Speaker identifies conversation dead-end ('going in circles') and explicitly requests concrete historical data on employment impacts. Last N chunks show uncertainty ('I think', 'perhaps') and circular discussion. An insight with historical employment data would move the conversation forward."
+            }
+        },
+        {
+            "input": {
+                "current_chunk": "Let me continue with the next point on the agenda - the budget allocation for Q2.",
+                "last_n_chunks": [
+                    "Q1 performance exceeded expectations.",
+                    "Revenue targets were met ahead of schedule.",
+                    "Cost savings identified in operations.",
+                    "Team morale is high after recent successes.",
+                    "Now let's move to the next item."
+                ],
+                "existing_insights": "No insights generated for recent chunks.",
+                "current_topic": "Budget Review",
+                "meeting_summary": "Quarterly budget review and performance assessment."
+            },
+            "output": {
+                "insight_needed": false,
+                "reasoning": "Procedural transition to next agenda item. No uncertainty, no information requests, no knowledge gaps. Discussion is about internal budget allocation, not requiring external historical knowledge."
+            }
+        },
+        {
+            "input": {
+                "current_chunk": "What was the outcome of Bill C-22 that dealt with similar healthcare provisions? I recall there was significant debate.",
+                "last_n_chunks": [
+                    "Our healthcare bill needs to address rural access.",
+                    "Funding mechanisms are still being debated.",
+                    "Provincial jurisdictions complicate implementation.",
+                    "We need a workable solution.",
+                    "Previous attempts have had mixed results."
+                ],
+                "existing_insights": "Insight #1 (2 chunks ago): Previous healthcare legislation faced implementation challenges due to provincial coordination issues [[SOURCE:debate:41-2:155]]",
+                "current_topic": "Healthcare Legislation",
+                "meeting_summary": "Drafting new healthcare legislation with focus on rural access and provincial coordination."
+            },
+            "output": {
+                "insight_needed": true,
+                "reasoning": "Direct information request about specific bill (C-22) outcome with historical reference. While recent insight discusses provincial coordination challenges, it doesn't specifically address Bill C-22 outcome that speaker is asking about. New insight would provide the specific legislative precedent requested."
+            }
+        }
+    ],
+    "insight_query_constructor": [
+        {
+            "input": {
+                "current_chunk": "What was the outcome of Bill C-15 that dealt with Indigenous rights? I recall there was significant debate.",
+                "last_n_chunks": [
+                    "Our reconciliation framework needs to address treaty rights.",
+                    "Implementation of UNDRIP principles is crucial.",
+                    "Provincial jurisdictions complicate matters.",
+                    "We need a workable solution."
+                ],
+                "current_topic": "Indigenous Rights Legislation"
+            },
+            "output": {
+                "queries": [
+                    {
+                        "hypothetical_insight": "Bill C-15, the United Nations Declaration on the Rights of Indigenous Peoples Act, received Royal Assent in June 2021 after extensive parliamentary debate. The bill established a framework for implementing UNDRIP in Canadian law, requiring consultation with Indigenous peoples on legislation affecting their rights."
+                    },
+                    {
+                        "hypothetical_insight": "During Bill C-15 debate, Conservative MPs raised concerns about resource development impacts and provincial jurisdiction. Key amendments addressed these concerns by clarifying that provincial powers would not be affected, ultimately leading to passage with multi-party support."
+                    },
+                    {
+                        "hypothetical_insight": "The UNDRIP implementation framework under Bill C-15 requires federal government to develop an action plan in consultation with Indigenous peoples and to ensure consistency of federal laws with the Declaration. This includes treaty rights recognition and free, prior, and informed consent processes."
+                    }
+                ],
+                "reasoning": "Generated 3 complementary queries for moderate complexity: (1) legislative outcome for basic facts, (2) debate and amendments for political context, (3) implementation framework for practical implications. This multi-angle approach increases likelihood of finding relevant prior insights."
+            }
+        },
+        {
+            "input": {
+                "current_chunk": "We're seeing similar patterns in agricultural emissions. Are there precedents for sector-specific carbon pricing?",
+                "last_n_chunks": [
+                    "Farm groups have raised concerns about competitiveness.",
+                    "Transportation sector had different implementation challenges.",
+                    "We need to balance environmental goals with economic reality."
+                ],
+                "current_topic": "Carbon Pricing Policy"
+            },
+            "output": {
+                "queries": [
+                    {
+                        "hypothetical_insight": "Several provinces implemented sector-specific carbon pricing approaches for agriculture. Saskatchewan's output-based pricing system provided rebates for emissions-intensive sectors including grain farming and livestock operations, recognizing that many farm emissions come from biological processes rather than fuel combustion."
+                    },
+                    {
+                        "hypothetical_insight": "Bill C-234 proposed exempting farmers from carbon tax on natural gas and propane used for heating and drying grain. The bill passed the House with multi-party support but faced amendments in the Senate that narrowed its scope, ultimately applying only to grain drying operations."
+                    }
+                ],
+                "reasoning": "Generated 2 queries for focused information need targeting different precedent types: (1) provincial policy approaches with specific mechanisms, (2) federal legislative example with political outcome. Covers both regional and national precedents."
+            }
+        },
+        {
+            "input": {
+                "current_chunk": "Can we see how party voting positions compared on the agricultural carbon tax exemption bill?",
+                "last_n_chunks": [
+                    "Bill C-234 aimed to exempt farmers from carbon tax on heating and drying.",
+                    "There was significant debate on party lines.",
+                    "I want to understand the final vote breakdown."
+                ],
+                "current_topic": "Carbon Pricing Policy"
+            },
+            "output": {
+                "queries": [
+                    {
+                        "hypothetical_insight": "[VIZ: grouped_bar] Party Voting on Bill C-234 Agricultural Carbon Tax Exemptions: Vote breakdown showing Liberals (152 For, 5 Against), Conservatives (10 For, 110 Against), NDP (24 For, 1 Against), and Bloc Québécois (32 For, 0 Against) on agricultural carbon tax exemption bill"
+                    },
+                    {
+                        "hypothetical_insight": "During Bill C-234 debate, Conservatives strongly supported agricultural exemptions citing farmer competitiveness concerns, while Liberals opposed arguing it would weaken climate policy. NDP MPs were divided, with rural members supporting exemptions while urban caucus emphasized climate targets."
+                    }
+                ],
+                "reasoning": "Generated 2 complementary queries: (1) visualization for quantitative vote breakdown, (2) text insight for qualitative rationale. Together they provide both data and context for understanding party positions."
+            }
+        }
+    ],
+    "query_constructor": [
+        {
+            "input": {
+                "current_chunk": "How have MPs voted on carbon tax legislation over the past 5 years? I need to understand the voting patterns.",
+                "last_n_chunks": [
+                    "The carbon tax debate has been ongoing.",
+                    "Different parties have different positions.",
+                    "We need to look at historical precedents."
+                ],
+                "current_topic": "Carbon Tax Policy",
+                "last_n_insights": "No previous insights in this session."
+            },
+            "output": {
+                "queries": [
+                    {
+                        "query_text": "Parliamentary votes on carbon tax legislation 2024-2023",
+                        "hypothetical_response": "In 2024, Bill C-234 amendments regarding agricultural carbon tax exemptions were voted on three times in the House. Conservative MPs unanimously supported exemptions, Liberal MPs largely opposed with some rural caucus members voting in favor, NDP split on the issue. In 2023, the main carbon pricing framework votes saw similar partisan divisions.",
+                        "suggested_insight_types": [
+                            "text",
+                            "visualization"
+                        ]
+                    },
+                    {
+                        "query_text": "Parliamentary votes on carbon tax legislation 2022-2021",
+                        "hypothetical_response": "During 2021-2022, carbon tax rate increase legislation passed with Liberal-NDP support. Conservative opposition was unanimous, while Green Party and Bloc Qu\u00e9b\u00e9cois showed conditional support based on environmental targets and provincial jurisdiction concerns.",
+                        "suggested_insight_types": [
+                            "text",
+                            "visualization"
+                        ]
+                    },
+                    {
+                        "query_text": "Parliamentary votes on carbon tax legislation 2020-2019",
+                        "hypothetical_response": "The original carbon pricing framework votes in 2019-2020 established baseline patterns. Liberal government majority passed initial legislation, with consistent Conservative opposition and NDP support tied to social program funding provisions.",
+                        "suggested_insight_types": [
+                            "text",
+                            "visualization"
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "input": {
+                "current_chunk": "What about Bill C-234's progress through committee? Has anything changed since last month?",
+                "last_n_chunks": [
+                    "Bill C-234 deals with agricultural exemptions.",
+                    "There was significant debate in committee.",
+                    "Farm groups have been lobbying intensely."
+                ],
+                "current_topic": "Agricultural Carbon Tax Exemptions",
+                "last_n_insights": "- Bill C-234 proposes carbon tax exemptions for grain drying and barn heating. Introduced in 43rd Parliament, aimed to reduce costs for farmers facing increased operational expenses."
+            },
+            "output": {
+                "queries": [
+                    {
+                        "query_text": "Bill C-234 committee proceedings amendments December 2024",
+                        "suggested_insight_types": [
+                            "text"
+                        ]
+                    },
+                    {
+                        "query_text": "Bill C-234 stakeholder testimony committee hearings recent",
+                        "hypothetical_response": "Agriculture Committee heard from Canadian Federation of Agriculture, Grain Growers of Canada, and environmental groups in recent weeks. Farm representatives emphasized economic necessity of exemptions citing 30% cost increases. Environmental witnesses raised concerns about precedent and emissions targets.",
+                        "suggested_insight_types": [
+                            "text"
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "input": {
+                "current_chunk": "I'm curious about Indigenous consultation requirements. What does the law actually say?",
+                "last_n_chunks": [
+                    "Consultation is constitutionally required.",
+                    "There have been court cases on this.",
+                    "Different departments have different processes."
+                ],
+                "current_topic": "Indigenous Consultation Law",
+                "last_n_insights": "No previous insights in this session."
+            },
+            "output": {
+                "queries": [
+                    {
+                        "query_text": "Constitutional requirements Indigenous consultation duty to consult",
+                        "hypothetical_response": "Section 35 of the Constitution Act 1982 recognizes and affirms Aboriginal and treaty rights. Supreme Court established duty to consult framework in Haida Nation v. BC (2004) and Taku River (2004), requiring Crown to consult when decisions may adversely affect Indigenous rights. Consultation depth varies from minimal to deep depending on strength of claim and severity of impact.",
+                        "suggested_insight_types": [
+                            "text"
+                        ]
+                    },
+                    {
+                        "query_text": "Indigenous consultation legislation Bill C-15 UNDRIP implementation",
+                        "suggested_insight_types": [
+                            "text"
+                        ]
+                    }
+                ]
+            }
+        }
+    ],
+    "retriever_planner": [
+        {
+            "input": {
+                "query_text": "Parliamentary votes on carbon tax legislation 2024-2023",
+                "hypothetical_response": "In 2024, Bill C-234 amendments regarding agricultural carbon tax exemptions were voted on three times in the House. Conservative MPs unanimously supported exemptions, Liberal MPs largely opposed with some rural caucus members voting in favor, NDP split on the issue.",
+                "suggested_insight_types": "text, visualization"
+            },
+            "output": {
+                "search_query": "carbon tax agricultural exemptions Bill C-234 parliamentary votes",
+                "document_types": [
+                    "vote",
+                    "debate"
+                ],
+                "date_range_start": "2023-01-01",
+                "date_range_end": null,
+                "top_k": 20,
+                "reasoning": "Query asks for recent votes (2023-2024) on carbon tax. Visualization with bar chart suggested, so prioritizing vote records which have structured voting data. Using vote and debate types to capture both voting records and surrounding discussions. Date filter set to 2023 onwards to focus on recent period. Top_k=20 for broad coverage of multiple votes."
+            }
+        },
+        {
+            "input": {
+                "query_text": "Bill C-234 text",
+                "hypothetical_response": "Bill C-234 proposes carbon tax exemptions for grain drying and barn heating. Introduced in 43rd Parliament, aimed to reduce costs for farmers.",
+                "suggested_insight_types": "text"
+            },
+            "output": {
+                "search_query": "Bill C-234 full text legislation agricultural carbon tax exemptions",
+                "document_types": [
+                    "bill"
+                ],
+                "date_range_start": null,
+                "date_range_end": null,
+                "top_k": 10,
+                "reasoning": "Query specifically requests bill text for text insight. Using only 'bill' document type as we need the legislative text itself. No date filter needed - we want all versions. Low top_k=10 since query is very specific."
+            }
+        },
+        {
+            "input": {
+                "query_text": "carbon tax policy history debates committees research",
+                "hypothetical_response": "Carbon pricing framework has been debated extensively since 2018, with multiple committee studies, research papers, and legislative debates examining economic impacts, provincial jurisdiction, and environmental effectiveness.",
+                "suggested_insight_types": "text"
+            },
+            "output": {
+                "search_query": "carbon tax carbon pricing policy framework implementation history",
+                "document_types": [],
+                "date_range_start": null,
+                "date_range_end": null,
+                "top_k": 25,
+                "reasoning": "Query needs comprehensive historical overview from multiple source types (debates, committees, research) for text insight. Leaving document_types empty to search all types. No date filter for full historical context. High top_k=25 for broad coverage."
+            }
+        },
+        {
+            "input": {
+                "query_text": "Latest IPCC climate projections impact on Canadian policy 2024",
+                "hypothetical_response": "The 2024 IPCC AR6 synthesis report projects accelerating warming impacts on northern regions, which Canadian MPs have referenced in recent debates calling for updated emission targets.",
+                "suggested_insight_types": "text"
+            },
+            "output": {
+                "search_query": "IPCC climate report projections Canadian emission reduction targets policy",
+                "document_types": [
+                    "debate",
+                    "committee",
+                    "research"
+                ],
+                "date_range_start": "2023-01-01",
+                "date_range_end": null,
+                "top_k": 15,
+                "use_web_search": true,
+                "reasoning": "Query references the latest IPCC report which may contain very recent findings not yet in the parliamentary KB. Using web search to supplement KB results with current IPCC data. KB search targets debates, committee records, and research papers that discuss Canadian climate targets in relation to IPCC findings."
+            }
+        }
+    ],
+    "retriever_feedback": [
+        {
+            "input": {
+                "query_text": "Parliamentary committee reports on housing affordability",
+                "hypothetical_response": "Not provided",
+                "suggested_insight_types": "text",
+                "attempted_query": "Search Query: \"affordable housing committee study reports\"\nDocument Types: ['committee-report']\nDate Range: No date filter\nTop K: 15\nDocuments Retrieved: 8",
+                "documents_content": "[Document 1]\nType: debate | Document ID: debate_44-1_2024-03-15_001 | Source: hansard-2024-03-15\nContent: The housing crisis requires immediate action. We need more supply, better zoning, and support for first-time buyers. The opposition has proposed several amendments...\n---\n\n[Document 2]\nType: debate | Document ID: debate_44-1_2024-02-20_003 | Source: hansard-2024-02-20\nContent: Housing prices have doubled in the last decade. Young Canadians cannot afford to buy homes. The government must act now...\n---\n\n[Document 3]\nType: bill | Document ID: bill_44-1_C-47 | Source: bill-C-47-2024\nContent: An Act to amend the National Housing Strategy Act to provide additional funding for affordable housing programs...",
+                "doc_count": 8,
+                "iteration": 1,
+                "max_iterations": 3
+            },
+            "output": {
+                "action": "refine_query",
+                "document_rankings": [
+                    {
+                        "document_id": "0000053f-3331-4408-b29e-835f5b8cb409",
+                        "relevance_score": 0.5
+                    },
+                    {
+                        "document_id": "472f8a11-b92d-4e92-8d74-1a3e5c9b2f0a",
+                        "relevance_score": 0.4
+                    },
+                    {
+                        "document_id": "9e13b47c-6d51-402a-9f8e-7320c15d42b6",
+                        "relevance_score": 0.6
+                    }
+                ],
+                "reasoning": "Documents retrieved are debates and bills, but query specifically asks for committee reports. Search query needs to be adjusted to prioritize committee-report document type, or the document type filter needs to be more specific. Only 8 documents retrieved suggests query might be too narrow. Documents are moderately relevant (scores 0.4-0.6) - only one document (bill at 0.6) meets the relevance threshold, meaning if we proceed, most retrieved documents would be considered below acceptable quality. Low scores indicate poor retrieval quality - refining the query is necessary to get documents that will actually be useful for insight generation.",
+                "refinement_feedback": "Change search query to focus on committee study keywords: 'housing affordability committee study recommendations findings'. Keep document_types as ['committee-report', 'committee'] to include both reports and committee transcripts. Consider increasing top_k to 20 for broader coverage."
+            }
+        },
+        {
+            "input": {
+                "query_text": "Bill C-234 agricultural exemptions impact on farmers",
+                "hypothetical_response": "Bill C-234 proposes carbon tax exemptions for grain drying and barn heating, aimed to reduce costs for farmers facing increased operational expenses.",
+                "suggested_insight_types": "text",
+                "attempted_query": "Search Query: \"Bill C-234 agricultural carbon tax exemptions farmer impact\"\nDocument Types: ['bill', 'debate']\nDate Range: No date filter\nTop K: 15\nDocuments Retrieved: 14",
+                "documents_content": "[Document 1]\nType: bill | Document ID: bill_43-2_C-234 | Source: bill-C-234-43-2\nContent: This Act amends the Greenhouse Gas Pollution Pricing Act to extend eligibility for relief from charges under that Act in respect of fuel that is used for the purpose of...\n---\n\n[Document 2]\nType: debate | Document ID: debate_43-2_2023-11-20_045 | Source: hansard-2023-11-20\nContent: Bill C-234 is crucial for farmers. The carbon tax adds 30% to grain drying costs. In Saskatchewan, this means an additional $50,000 per year for medium-sized operations. Without these exemptions...\n---\n\n[Document 3]\nType: debate | Document ID: debate_43-2_2023-11-20_046 | Source: hansard-2023-11-20  \nContent: ...farmers will face bankruptcy. The agriculture sector is already struggling with low commodity prices and high input costs. This bill provides necessary relief...\n---\n\n[Document 4]\nType: committee-report | Document ID: committee_43-2_AGRI-15 | Source: committee-AGRI-2023-12\nContent: During committee hearings, the Canadian Federation of Agriculture testified that carbon pricing on farm fuels creates significant financial burden. Representatives noted that alternatives to fossil fuels for grain drying are not yet commercially viable...",
+                "doc_count": 14,
+                "iteration": 1,
+                "max_iterations": 3
+            },
+            "output": {
+                "action": "expand_chunks",
+                "document_rankings": [
+                    {
+                        "document_id": "472f8a11-b92d-4e92-8d74-1a3e5c9b2f0a",
+                        "relevance_score": 0.9
+                    },
+                    {
+                        "document_id": "9e13b47c-6d51-402a-9f8e-7320c15d42b6",
+                        "relevance_score": 1.0
+                    },
+                    {
+                        "document_id": "d55c71b0-f3a4-4921-bc6e-2947d0e8f152",
+                        "relevance_score": 0.9
+                    },
+                    {
+                        "document_id": "6b829e14-d035-4762-a59f-c418b3d270e9",
+                        "relevance_score": 0.8
+                    }
+                ],
+                "reasoning": "Documents are highly relevant to the query with excellent scores (0.8-1.0, all well above relevance threshold). All 4 documents shown would survive any filtering and be strong candidates for insight generation. They contain bill text, farmer testimony with specific cost data ($50,000/year), and economic impacts. If we proceed now with 14 documents total, the top-ranked documents by these scores would be used for insights. However, documents 2 and 3 appear to be consecutive chunks from the same debate that are cut off mid-argument ('...farmers will face bankruptcy'). Document 4 from committee hearings is also truncated. Expanding these specific chunks will provide complete context, which will make the final selected documents more useful for generating comprehensive insights about farmer impacts.",
+                "chunk_ids_to_expand": [
+                    "af0e2391-512c-483b-967d-d401e2f5b89a",
+                    "6b829e14-d035-4762-a59f-c418b3d270e9"
+                ]
+            }
+        },
+        {
+            "input": {
+                "query_text": "Supreme Court decisions on Indigenous consultation duty",
+                "hypothetical_response": "Supreme Court established duty to consult framework in Haida Nation v. BC (2004) and Taku River (2004), requiring Crown to consult when decisions may adversely affect Indigenous rights.",
+                "suggested_insight_types": "text",
+                "attempted_query": "Search Query: \"Indigenous consultation duty to consult Supreme Court constitutional requirements\"\nDocument Types: []\nDate Range: No date filter\nTop K: 20\nDocuments Retrieved: 18",
+                "documents_content": "[Document 1]\nType: research | Document ID: library_42-1_2020-45E_001 | Source: library-2020-45E\nContent: The duty to consult doctrine, established by the Supreme Court in 2004-2005, requires the Crown to consult with Indigenous peoples when contemplating conduct that might adversely impact established or potential Aboriginal or treaty rights. The leading cases are Haida Nation v. British Columbia and Taku River Tlingit First Nation v. British Columbia. The Court held that consultation must be meaningful and occur before final decisions are made. The depth of consultation varies on a spectrum from minimal to deep, depending on the strength of the claim and the severity of potential impacts...\n---\n\n[Document 2]\nType: research | Document ID: library_42-1_2020-45E_002 | Source: library-2020-45E\nContent: ...Following Haida and Taku River, subsequent decisions clarified the framework. In Mikisew Cree (2005), the Court emphasized that consultation must be adequate and meaningful. The Crown cannot simply go through the motions. More recent cases like Carrier Sekani (2010) established that consultation is required even for policy decisions that affect treaty rights...\n---\n\n[Document 3]\nType: debate | Document ID: debate_44-1_2021-06-15_012 | Source: hansard-2021-06-15\nContent: Bill C-15 implements the United Nations Declaration on the Rights of Indigenous Peoples in Canadian law. This builds on the constitutional duty to consult established by Supreme Court precedents. The Minister of Justice explained that the bill creates a framework for ensuring that federal laws align with UNDRIP principles, including free, prior and informed consent...",
+                "doc_count": 18,
+                "iteration": 1,
+                "max_iterations": 3
+            },
+            "output": {
+                "action": "proceed_to_insight_generation",
+                "document_rankings": [
+                    {
+                        "document_id": "library_42-1_2020-45E_001",
+                        "relevance_score": 1.0
+                    },
+                    {
+                        "document_id": "library_42-1_2020-45E_002",
+                        "relevance_score": 1.0
+                    },
+                    {
+                        "document_id": "debate_44-1_2021-06-15_012",
+                        "relevance_score": 0.8
+                    }
+                ],
+                "reasoning": "Documents comprehensively address the query with excellent relevance scores (0.8-1.0, all well above threshold). Research documents 1 and 2 score 1.0 - directly addressing the query with Supreme Court duty to consult framework, including key cases (Haida, Taku River, Mikisew Cree, Carrier Sekani), legal requirements, and consultation spectrum. Document 3 scores 0.8 adding legislative context with Bill C-15 and UNDRIP implementation. Retrieved 18 documents total with strong topical relevance. With these high scores, the top-ranked documents (based on my scoring) will be selected for insight generation and will provide comprehensive, high-quality information. The 3 documents shown are clear top candidates. No need for further retrieval - we have sufficient high-quality documents to generate a well-cited text insight about constitutional consultation requirements."
+            }
+        }
+    ],
+    "related_insight_finder": [
+        {
+            "input": {
+                "current_chunk": "What was the timeline for implementing Bill C-22's healthcare provisions?",
+                "last_n_chunks": [
+                    "Our current bill needs phased implementation.",
+                    "Stakeholder consultations are ongoing.",
+                    "Provincial coordination is essential."
+                ],
+                "retrieved_insights": "[Insight #insight_abc123] (Similarity: 0.87, Thread: thread_xyz789)\nBill C-22, the Canada Disability Benefit Act, received Royal Assent in June 2022. Implementation occurred in two phases: framework regulations (December 2022) and benefit payments (July 2023). Federal-provincial coordination required 18 months of negotiations with all territories to align with existing disability programs. [bill_44-1_C-22]\n\n[Insight #insight_def456] (Similarity: 0.72, Thread: thread_uvw234)\nHealthcare legislation in the 42nd Parliament faced significant delays due to provincial jurisdictional concerns. Most bills required extended committee hearings and amendments to address intergovernmental coordination. [committee_42-1_HESA-08]\n",
+                "num_retrieved": 2,
+                "current_topic": "Healthcare Legislation"
+            },
+            "output": {
+                "relevant_insight_found": true,
+                "selected_insight_id": "insight_abc123",
+                "reasoning": "First insight directly answers the question about Bill C-22 implementation timeline, providing specific phases (framework regulations Dec 2022, payments July 2023) and coordination details (18 months of negotiations). High similarity (0.87) and topically relevant. Second insight discusses healthcare delays generally but lacks the specific timeline information requested. The new insight can join thread_xyz789 to build on this implementation discussion."
+            }
+        },
+        {
+            "input": {
+                "current_chunk": "This housing policy seems similar to approaches tried in other cities. What were the results?",
+                "last_n_chunks": [
+                    "Municipal housing strategies need federal support.",
+                    "Affordable housing stock has declined.",
+                    "We're considering new incentive programs."
+                ],
+                "retrieved_insights": "[Insight #insight_ghi789] (Similarity: 0.65, Thread: thread_rst456)\nFederal housing initiatives since 2015 included the National Housing Strategy with $70 billion over 10 years. Programs focused on rental construction financing, community housing repairs, and homelessness prevention. Progress reports show mixed results with delays in construction targets. [research_43-2_housing-2020]\n\n[Insight #insight_jkl012] (Similarity: 0.58, Thread: thread_mno678)\n[VIZ: bar] Municipal Housing Completions 2018-2022: Year-over-year comparison showing Toronto (12,500 units), Vancouver (8,200 units), Montreal (9,800 units), with breakdown by affordable vs. market-rate construction across major Canadian cities\n",
+                "num_retrieved": 2,
+                "current_topic": "Housing Policy Reform"
+            },
+            "output": {
+                "relevant_insight_found": false,
+                "selected_insight_id": null,
+                "reasoning": "Neither insight provides the specific comparative results requested. First insight (0.65) discusses federal programs generally without city-specific outcomes. Second insight (0.58) is a visualization showing construction volumes but not policy effectiveness results. The conversation needs outcome analysis of specific municipal approaches, which these insights don't provide. Better to generate fresh insight."
+            }
+        }
+    ],
+    "insight_selector": [
+        {
+            "input": {
+                "domain_context": "Parliamentary proceedings",
+                "current_topic": "Climate Policy",
+                "transcript_chunk": "What are the emission reduction targets for 2030?",
+                "queries_formatted": "Query:\nQuery ID: q1\nText: emission reduction targets 2030\nSuggested Types: text\nSuggested Chart Types: None\n\nRetrieved Documents (3 total):\n\n  Document:\n  Doc ID: bill_c-12\n  Metadata:\n    document_type: bill\n    date: 2024-03-15\n  Content:\nCanada's 2030 emissions reduction target is 40-45% below 2005 levels...\n\n  Document:\n  Doc ID: debate_2024-03-20\n  Metadata:\n    document_type: debate\n  Content:\nThe minister confirmed the 2030 target remains at 40-45% reduction...\n\n  Document:\n  Doc ID: report_env-45\n  Metadata:\n    document_type: committee-report\n  Content:\nCommittee recommends strengthening the 2030 target to 50% reduction...\n\n---\n\nQuery:\nQuery ID: q2\nText: interim climate targets timeline\nSuggested Types: visualization\nSuggested Chart Types: timeline, line\n\nRetrieved Documents (2 total):\n\n  Document:\n  Doc ID: bill_c-12\n  Metadata:\n    document_type: bill\n  Content:\nInterim targets: 2025 (20% reduction), 2030 (40-45% reduction), 2035 (60% reduction)...\n\n  Document:\n  Doc ID: report_env-45\n  Metadata:\n    document_type: committee-report\n  Content:\nProposed milestone timeline with specific reduction percentages for 2025, 2030, 2035, 2040, and 2050...\n\n",
+                "recent_insights": "No insights have been generated yet in this conversation."
+            },
+            "output": {
+                "action": "generate_insights",
+                "generator_assignments": [
+                    {
+                        "generator_type": "text",
+                        "query_ids": [
+                            "q1",
+                            "q2"
+                        ],
+                        "reasoning": "Both queries address the conversation question about 2030 targets. Query 1 provides policy context and debate, query 2 adds timeline perspective. Together they create a comprehensive 280-character narrative about Canada's emission reduction commitments and progression toward 2030 goals."
+                    },
+                    {
+                        "generator_type": "viz",
+                        "query_ids": [
+                            "q2"
+                        ],
+                        "reasoning": "Query 2 retrieves structured timeline data with specific reduction percentages across multiple years (2025, 2030, 2035, 2040, 2050). This numerical data is perfect for a timeline or line chart visualization showing the emission reduction trajectory. Suggested chart types include timeline and line."
+                    }
+                ],
+                "overall_reasoning": "The transcript chunk asks about 2030 emission targets. Both queries address this directly with high-quality documents. Query 1 provides narrative context suitable for text, while Query 2 contains structured timeline data ideal for visualization. Note that Query 2 appears in BOTH assignments because the timeline data can contribute to both narrative (mentioning milestone years) and visualization (chart showing progression). This demonstrates that queries are NOT mutually exclusive - the same query can serve both text and viz generators."
+            }
+        },
+        {
+            "input": {
+                "domain_context": "Parliamentary proceedings",
+                "current_topic": "Healthcare Funding",
+                "transcript_chunk": "Have we discussed federal healthcare transfers recently?",
+                "queries_formatted": "Query:\nQuery ID: q1\nText: federal healthcare transfer payments\nSuggested Types: text\nSuggested Chart Types: None\n\nRetrieved Documents (2 total):\n\n  Document:\n  Doc ID: debate_2024-01-10\n  Metadata:\n    document_type: debate\n  Content:\nThe federal government announced $2 billion in new healthcare transfers...\n\n  Document:\n  Doc ID: debate_2024-01-12\n  Metadata:\n    document_type: debate\n  Content:\nHealthcare transfer negotiations continue, with provinces requesting increased funding...\n\n",
+                "recent_insights": "Insight #insight_hc1: Federal healthcare transfers increased by $2 billion in January 2024, with negotiations ongoing for additional provincial funding. [debate_2024-01-10] [debate_2024-01-12]"
+            },
+            "output": {
+                "action": "halt",
+                "generator_assignments": [],
+                "overall_reasoning": "The transcript chunk asks if healthcare transfers were discussed recently. The recent session insights already comprehensively cover the retrieved information - insight #insight_hc1 mentions the $2 billion transfer and ongoing negotiations, citing the exact same documents (debate_2024-01-10 and debate_2024-01-12). Generating a new insight would be redundant and add no new value to the conversation. Rule 5: halt to avoid session-level duplication."
+            }
+        },
+        {
+            "input": {
+                "domain_context": "Parliamentary proceedings",
+                "current_topic": "Economic Policy",
+                "transcript_chunk": "What were the main talking points today?",
+                "queries_formatted": "Query:\nQuery ID: q1\nText: economic discussion points\nSuggested Types: text\nSuggested Chart Types: None\n\nRetrieved Documents (0 total)\n\n",
+                "recent_insights": "No insights have been generated yet in this conversation."
+            },
+            "output": {
+                "action": "halt",
+                "generator_assignments": [],
+                "overall_reasoning": "The transcript chunk asks about 'main talking points today' but Query 1 failed to retrieve any documents from the knowledge base. Without retrieved documents containing substantive information, we cannot generate any meaningful insights. The query was too vague and didn't match any relevant content in the knowledge base. Action: halt because no insight generation is possible without source documents."
+            }
+        },
+        {
+            "input": {
+                "domain_context": "Parliamentary proceedings",
+                "current_topic": "Bill C-15 Indigenous Rights",
+                "transcript_chunk": "Let's review the bill's provisions and the consultation timeline with Indigenous communities.",
+                "queries_formatted": "Query:\nQuery ID: q1\nText: Bill C-15 key provisions Indigenous rights\nSuggested Types: text\nSuggested Chart Types: None\n\nRetrieved Documents (2 total):\n\n  Document:\n  Doc ID: bill_c-15\n  Metadata:\n    document_type: bill\n  Content:\nBill C-15 establishes framework for implementing UN Declaration on Rights of Indigenous Peoples, including free prior and informed consent principles...\n\n  Document:\n  Doc ID: committee_report_inan-20\n  Metadata:\n    document_type: committee-report\n  Content:\nCommittee analysis of Bill C-15 highlights consultation requirements and implementation mechanisms...\n\n---\n\nQuery:\nQuery ID: q2\nText: Bill C-15 Indigenous consultation timeline\nSuggested Types: text, visualization\nSuggested Chart Types: timeline\n\nRetrieved Documents (3 total):\n\n  Document:\n  Doc ID: bill_c-15\n  Metadata:\n    document_type: bill\n  Content:\nConsultation timeline: Phase 1 (6 months) - community engagement, Phase 2 (12 months) - policy development, Phase 3 (ongoing) - implementation monitoring...\n\n  Document:\n  Doc ID: debate_2024-02-15\n  Metadata:\n    document_type: debate\n  Content:\nThe minister outlined the multi-phase consultation approach with specific timelines for each stage...\n\n  Document:\n  Doc ID: committee_report_inan-20\n  Metadata:\n    document_type: committee-report\n  Content:\nRecommendations for consultation include extended timelines and additional engagement mechanisms...\n\n",
+                "recent_insights": "No insights have been generated yet in this conversation."
+            },
+            "output": {
+                "action": "generate_insights",
+                "generator_assignments": [
+                    {
+                        "generator_type": "text",
+                        "query_ids": [
+                            "q1",
+                            "q2"
+                        ],
+                        "reasoning": "The transcript chunk asks to 'review the bill's provisions AND consultation timeline'. Both queries directly address these two aspects. Query 1 covers key provisions and UNDRIP framework, Query 2 covers consultation phases and timelines. Combining them into ONE text insight will provide comprehensive coverage addressing both parts of the conversation request within the 280-character limit."
+                    }
+                ],
+                "overall_reasoning": "The conversation moment asks about two specific aspects of Bill C-15: provisions and consultation timeline. Both queries retrieve relevant, high-quality documents addressing these needs. The documents show significant overlap (bill text and committee report appear in both), indicating complementary perspectives on the same legislation. While Query 2 suggests visualization and timeline chart type, the consultation phases are primarily narrative (6 months, 12 months, ongoing) without dense quantitative data ideal for visualization. A single text insight combining provisions and timeline information is most appropriate. Only selecting text generator (not viz) because the timeline data is more qualitative than quantitative."
+            }
+        },
+        {
+            "input": {
+                "domain_context": "Parliamentary proceedings",
+                "current_topic": "Federal Climate Spending",
+                "transcript_chunk": "Can someone remind me of the climate spending figures?",
+                "queries_formatted": "Query:\nQuery ID: q1\nText: Federal climate program spending by year\nSuggested Types: visualization\nSuggested Chart Types: bar\n\nRetrieved Documents (1 total):\n\n  Document:\n  Doc ID: budget_2024\n  Metadata:\n    document_type: budget_report\n  Content:\nFederal climate program spending: 2020 - $2.3B, 2021 - $3.1B, 2022 - $4.5B, 2023 - $5.8B, 2024 - $7.2B.\n\n",
+                "recent_insights": "Insight #insight_clim1: [VIZ: Simple Bar Chart] | Title: Climate Program Spending | Subtitle: Federal budget allocations for climate programs have more than tripled from 2020 to 2024. | Federal climate spending rose from $2.3B in 2020 to $7.2B in 2024, with each year showing consistent growth. | Data: 5 rows, fields=['year', 'spending_billions'] | Cited docs: budget_2024"
+            },
+            "output": {
+                "action": "halt",
+                "generator_assignments": [],
+                "overall_reasoning": "The retrieved document (budget_2024) contains the exact same climate spending data (2020-2024, $2.3B to $7.2B) that is already covered by recent insight #insight_clim1, which is a bar chart showing the same 5 data points with the same fields. Generating either a text or viz insight would be fully redundant. Rule 5: halt to avoid session-level duplication of both data and visualization."
+            }
+        }
+    ],
+    "text_insight_generator": [
+        {
+            "input": {
+                "domain_context": "Parliamentary proceedings",
+                "current_topic": "Carbon Pricing Policy",
+                "query_texts": "carbon tax impact on agriculture | farming sector concerns about fuel costs",
+                "last_n_insights": "No previous insights in this session.",
+                "documents_with_metadata": "[Document 1]\nDoc ID: debate_2024-03-15\nMetadata:\n  document_type: debate\n  session: 44-1\nContent:\nFarmers face significant challenges with carbon pricing on diesel fuel used for farm operations. The agricultural exemption only covers gasoline, leaving diesel-dependent operations like grain drying and transportation subject to full carbon tax...\n\n[Document 2]\nDoc ID: committee_agri-12\nMetadata:\n  document_type: committee-report\nContent:\nCommittee heard from agricultural producers about 15-20% increase in operational costs due to carbon pricing on farm fuels...\n\n[Document 3]\nDoc ID: bill_c-234\nMetadata:\n  document_type: bill\nContent:\nBill C-234 proposes expanding carbon tax exemptions to include propane and natural gas for farm use in heating and grain drying operations..."
+            },
+            "output": {
+                "title": "Agricultural Carbon Tax Impact",
+                "content": "Carbon pricing significantly impacts agricultural operations through diesel fuel costs, with farmers reporting 15-20% operational cost increases. Current exemptions exclude diesel for grain drying and transport. [debate_2024-03-15] [committee_agri-12] [bill_c-234]",
+                "cited_document_ids": [
+                    "debate_2024-03-15",
+                    "committee_agri-12",
+                    "bill_c-234"
+                ]
+            }
+        },
+        {
+            "input": {
+                "domain_context": "Parliamentary proceedings",
+                "current_topic": "Healthcare Reform",
+                "query_texts": "federal health transfers to provinces",
+                "last_n_insights": "No previous insights in this session.",
+                "documents_with_metadata": "[Document 1]\nDoc ID: budget_2024\nMetadata:\n  document_type: research\nContent:\nFederal government committed $198 billion over 10 years in new health transfers to provinces and territories, including $25 billion immediate bilateral deals and $17.3 billion Canada Health Transfer top-up..."
+            },
+            "output": {
+                "title": "Federal Health Transfer Commitment",
+                "content": "Federal government committed $198B over 10 years in new health transfers, including $25B in immediate bilateral deals and $17.3B Canada Health Transfer increase. [budget_2024]",
+                "cited_document_ids": [
+                    "budget_2024"
+                ]
+            }
+        }
+    ],
+    "viz_insight_planner": [
+        {
+            "input": {
+                "domain_context": "Parliamentary proceedings",
+                "current_topic": "Climate Emissions",
+                "query_texts": "Canada emission reduction targets timeline",
+                "last_n_insights": "No previous insights in this session.",
+                "documents_with_metadata": "[Document 1]\nDoc ID: bill_c-12\nMetadata:\n  document_type: bill\nContent:\nCanada's emission reduction targets: 2025 - 20% below 2005 levels, 2030 - 40-45% below 2005, 2035 - 60% below 2005, 2040 - 75% below 2005, 2050 - net zero emissions."
+            },
+            "output": {
+                "chart_type": "Simple Line Chart",
+                "title": "Emission Reduction Targets",
+                "subtitle": "Canada's legislated GHG reduction milestones from 2025 to 2050, showing the path to net-zero relative to 2005 levels.",
+                "labels": {
+                    "x": "Year",
+                    "y": "Reduction (%)"
+                },
+                "visualization_context": "Line chart showing progression of emission targets over time. Use year as ordinal x-axis, reduction percentage as quantitative y-axis. Add point markers. Include tooltip with year and reduction percentage for interactivity.",
+                "data": [
+                    {
+                        "year": 2025,
+                        "reduction_pct": 20
+                    },
+                    {
+                        "year": 2030,
+                        "reduction_pct": 42.5
+                    },
+                    {
+                        "year": 2035,
+                        "reduction_pct": 60
+                    },
+                    {
+                        "year": 2040,
+                        "reduction_pct": 75
+                    },
+                    {
+                        "year": 2050,
+                        "reduction_pct": 100
+                    }
+                ],
+                "source_document_ids": [
+                    "bill_c-12"
+                ]
+            }
+        },
+        {
+            "input": {
+                "domain_context": "Parliamentary voting records",
+                "current_topic": "Carbon Pricing Vote",
+                "query_texts": "Party vote breakdown on carbon pricing bill",
+                "last_n_insights": "No previous insights in this session.",
+                "documents_with_metadata": "[Document 1]\nDoc ID: vote_44-1\nMetadata:\n  document_type: vote_record\nContent:\nVote results on Bill C-234: Liberal: 152 For, 5 Against; Conservative: 10 For, 110 Against; NDP: 24 For, 1 Against; Bloc Qu\u00e9b\u00e9cois: 32 For, 0 Against."
+            },
+            "output": {
+                "chart_type": "Horizontal Normalized Stacked Bar Chart",
+                "title": "Party Vote on C-234",
+                "subtitle": "Proportion of votes for and against carbon pricing legislation by political party.",
+                "labels": {
+                    "x": "% of Votes",
+                    "y": "Party",
+                    "color": "Position"
+                },
+                "visualization_context": "Horizontal normalized stacked bar showing vote proportions per party. Each bar is 100%. Color-encode For vs Against. Tooltip should show party, position, and exact percentage.",
+                "data": [
+                    {
+                        "party": "Liberal",
+                        "position": "For",
+                        "percentage": 96.8
+                    },
+                    {
+                        "party": "Liberal",
+                        "position": "Against",
+                        "percentage": 3.2
+                    },
+                    {
+                        "party": "Conservative",
+                        "position": "For",
+                        "percentage": 8.3
+                    },
+                    {
+                        "party": "Conservative",
+                        "position": "Against",
+                        "percentage": 91.7
+                    },
+                    {
+                        "party": "NDP",
+                        "position": "For",
+                        "percentage": 96.0
+                    },
+                    {
+                        "party": "NDP",
+                        "position": "Against",
+                        "percentage": 4.0
+                    },
+                    {
+                        "party": "Bloc Qu\u00e9b\u00e9cois",
+                        "position": "For",
+                        "percentage": 100.0
+                    },
+                    {
+                        "party": "Bloc Qu\u00e9b\u00e9cois",
+                        "position": "Against",
+                        "percentage": 0.0
+                    }
+                ],
+                "source_document_ids": [
+                    "vote_44-1"
+                ]
+            }
+        },
+        {
+            "input": {
+                "domain_context": "Parliamentary proceedings",
+                "current_topic": "Federal Climate Spending",
+                "query_texts": "Federal spending on climate programs by year",
+                "last_n_insights": "No previous insights in this session.",
+                "documents_with_metadata": "[Document 1]\nDoc ID: budget_2024\nMetadata:\n  document_type: budget_report\nContent:\nFederal climate program spending: 2020 - $2.3B, 2021 - $3.1B, 2022 - $4.5B, 2023 - $5.8B, 2024 - $7.2B."
+            },
+            "output": {
+                "chart_type": "Simple Bar Chart",
+                "title": "Climate Program Spending",
+                "subtitle": "Federal budget allocations for climate programs have more than tripled from 2020 to 2024.",
+                "labels": {
+                    "x": "Year",
+                    "y": "$ Billions"
+                },
+                "visualization_context": "Bar chart showing spending per year. Year as ordinal x-axis, spending as quantitative y-axis. Tooltip should show year and exact spending amount.",
+                "data": [
+                    {
+                        "year": 2020,
+                        "spending_billions": 2.3
+                    },
+                    {
+                        "year": 2021,
+                        "spending_billions": 3.1
+                    },
+                    {
+                        "year": 2022,
+                        "spending_billions": 4.5
+                    },
+                    {
+                        "year": 2023,
+                        "spending_billions": 5.8
+                    },
+                    {
+                        "year": 2024,
+                        "spending_billions": 7.2
+                    }
+                ],
+                "source_document_ids": [
+                    "budget_2024"
+                ]
+            }
+        }
+    ],
+    "viz_insight_generator": [
+        {
+            "input": {
+                "chart_type": "Simple Line Chart",
+                "title": "Emission Reduction Targets",
+                "subtitle": "Canada's legislated GHG reduction milestones from 2025 to 2050.",
+                "labels": {
+                    "x": "Year",
+                    "y": "Reduction (%)"
+                },
+                "data": [
+                    {
+                        "year": 2025,
+                        "reduction_pct": 20
+                    },
+                    {
+                        "year": 2030,
+                        "reduction_pct": 42.5
+                    },
+                    {
+                        "year": 2035,
+                        "reduction_pct": 60
+                    },
+                    {
+                        "year": 2040,
+                        "reduction_pct": 75
+                    },
+                    {
+                        "year": 2050,
+                        "reduction_pct": 100
+                    }
+                ],
+                "visualization_context": "Line chart showing progression of emission targets over time. Use year as ordinal x-axis, reduction percentage as quantitative y-axis. Add point markers. Include tooltip with year and reduction percentage for interactivity."
+            },
+            "output": {
+                "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+                "data": {
+                    "values": [
+                        {
+                            "year": 2025,
+                            "reduction_pct": 20
+                        },
+                        {
+                            "year": 2030,
+                            "reduction_pct": 42.5
+                        },
+                        {
+                            "year": 2035,
+                            "reduction_pct": 60
+                        },
+                        {
+                            "year": 2040,
+                            "reduction_pct": 75
+                        },
+                        {
+                            "year": 2050,
+                            "reduction_pct": 100
+                        }
+                    ]
+                },
+                "width": 350,
+                "height": 350,
+                "layer": [
+                    {
+                        "mark": {
+                            "type": "line",
+                            "strokeWidth": 2,
+                            "point": {
+                                "size": 60
+                            }
+                        },
+                        "encoding": {
+                            "x": {
+                                "field": "year",
+                                "type": "ordinal",
+                                "axis": {
+                                    "title": null,
+                                    "grid": false
+                                }
+                            },
+                            "y": {
+                                "field": "reduction_pct",
+                                "type": "quantitative",
+                                "axis": {
+                                    "title": "Reduction (%)",
+                                    "grid": false
+                                },
+                                "scale": {
+                                    "domain": [
+                                        0,
+                                        100
+                                    ]
+                                }
+                            },
+                            "tooltip": [
+                                {
+                                    "field": "year",
+                                    "type": "ordinal",
+                                    "title": "Year"
+                                },
+                                {
+                                    "field": "reduction_pct",
+                                    "type": "quantitative",
+                                    "title": "Reduction (%)"
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "config": {
+                    "view": {
+                        "strokeWidth": 0
+                    }
+                }
+            }
+        },
+        {
+            "input": {
+                "chart_type": "Horizontal Normalized Stacked Bar Chart",
+                "title": "Party Vote on C-234",
+                "subtitle": "Proportion of votes for and against carbon pricing legislation by party.",
+                "labels": {
+                    "x": "% of Votes",
+                    "y": "Party",
+                    "color": "Position"
+                },
+                "data": [
+                    {
+                        "party": "Liberal",
+                        "position": "For",
+                        "percentage": 96.8
+                    },
+                    {
+                        "party": "Liberal",
+                        "position": "Against",
+                        "percentage": 3.2
+                    },
+                    {
+                        "party": "Conservative",
+                        "position": "For",
+                        "percentage": 8.3
+                    },
+                    {
+                        "party": "Conservative",
+                        "position": "Against",
+                        "percentage": 91.7
+                    },
+                    {
+                        "party": "NDP",
+                        "position": "For",
+                        "percentage": 96.0
+                    },
+                    {
+                        "party": "NDP",
+                        "position": "Against",
+                        "percentage": 4.0
+                    },
+                    {
+                        "party": "Bloc Qu\u00e9b\u00e9cois",
+                        "position": "For",
+                        "percentage": 100.0
+                    },
+                    {
+                        "party": "Bloc Qu\u00e9b\u00e9cois",
+                        "position": "Against",
+                        "percentage": 0.0
+                    }
+                ],
+                "visualization_context": "Horizontal normalized stacked bar showing vote proportions per party. Color-encode For vs Against. Tooltip should show party, position, and exact percentage."
+            },
+            "output": {
+                "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+                "data": {
+                    "values": [
+                        {
+                            "party": "Liberal",
+                            "position": "For",
+                            "percentage": 96.8
+                        },
+                        {
+                            "party": "Liberal",
+                            "position": "Against",
+                            "percentage": 3.2
+                        },
+                        {
+                            "party": "Conservative",
+                            "position": "For",
+                            "percentage": 8.3
+                        },
+                        {
+                            "party": "Conservative",
+                            "position": "Against",
+                            "percentage": 91.7
+                        },
+                        {
+                            "party": "NDP",
+                            "position": "For",
+                            "percentage": 96.0
+                        },
+                        {
+                            "party": "NDP",
+                            "position": "Against",
+                            "percentage": 4.0
+                        },
+                        {
+                            "party": "Bloc Qu\u00e9b\u00e9cois",
+                            "position": "For",
+                            "percentage": 100.0
+                        },
+                        {
+                            "party": "Bloc Qu\u00e9b\u00e9cois",
+                            "position": "Against",
+                            "percentage": 0.0
+                        }
+                    ]
+                },
+                "width": 350,
+                "height": 350,
+                "mark": "bar",
+                "encoding": {
+                    "x": {
+                        "field": "percentage",
+                        "type": "quantitative",
+                        "stack": "normalize",
+                        "axis": {
+                            "title": null,
+                            "grid": false
+                        }
+                    },
+                    "y": {
+                        "field": "party",
+                        "type": "nominal",
+                        "axis": {
+                            "title": null,
+                            "grid": false
+                        }
+                    },
+                    "color": {
+                        "field": "position",
+                        "type": "nominal",
+                        "scale": {
+                            "domain": [
+                                "For",
+                                "Against"
+                            ],
+                            "range": [
+                                "#4daf4a",
+                                "#e41a1c"
+                            ]
+                        },
+                        "legend": {
+                            "orient": "bottom",
+                            "direction": "horizontal",
+                            "title": null
+                        }
+                    },
+                    "tooltip": [
+                        {
+                            "field": "party",
+                            "type": "nominal",
+                            "title": "Party"
+                        },
+                        {
+                            "field": "position",
+                            "type": "nominal",
+                            "title": "Position"
+                        },
+                        {
+                            "field": "percentage",
+                            "type": "quantitative",
+                            "title": "% of Votes"
+                        }
+                    ]
+                },
+                "config": {
+                    "view": {
+                        "strokeWidth": 0
+                    }
+                }
+            }
+        },
+        {
+            "input": {
+                "chart_type": "Simple Bar Chart",
+                "title": "Climate Program Spending",
+                "subtitle": "Federal budget allocations for climate programs, 2020-2024.",
+                "labels": {
+                    "x": "Year",
+                    "y": "$ Billions"
+                },
+                "data": [
+                    {
+                        "year": 2020,
+                        "spending_billions": 2.3
+                    },
+                    {
+                        "year": 2021,
+                        "spending_billions": 3.1
+                    },
+                    {
+                        "year": 2022,
+                        "spending_billions": 4.5
+                    },
+                    {
+                        "year": 2023,
+                        "spending_billions": 5.8
+                    },
+                    {
+                        "year": 2024,
+                        "spending_billions": 7.2
+                    }
+                ],
+                "visualization_context": "Bar chart showing spending per year. Year as ordinal x-axis, spending as quantitative y-axis. Tooltip for exact amounts."
+            },
+            "output": {
+                "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+                "data": {
+                    "values": [
+                        {
+                            "year": 2020,
+                            "spending_billions": 2.3
+                        },
+                        {
+                            "year": 2021,
+                            "spending_billions": 3.1
+                        },
+                        {
+                            "year": 2022,
+                            "spending_billions": 4.5
+                        },
+                        {
+                            "year": 2023,
+                            "spending_billions": 5.8
+                        },
+                        {
+                            "year": 2024,
+                            "spending_billions": 7.2
+                        }
+                    ]
+                },
+                "width": 350,
+                "height": 350,
+                "mark": {
+                    "type": "bar"
+                },
+                "encoding": {
+                    "x": {
+                        "field": "year",
+                        "type": "ordinal",
+                        "axis": {
+                            "title": null,
+                            "grid": false
+                        }
+                    },
+                    "y": {
+                        "field": "spending_billions",
+                        "type": "quantitative",
+                        "axis": {
+                            "title": "$ Billions",
+                            "grid": false
+                        }
+                    },
+                    "tooltip": [
+                        {
+                            "field": "year",
+                            "type": "ordinal",
+                            "title": "Year"
+                        },
+                        {
+                            "field": "spending_billions",
+                            "type": "quantitative",
+                            "title": "Spending ($B)"
+                        }
+                    ]
+                },
+                "config": {
+                    "view": {
+                        "strokeWidth": 0
+                    }
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,33 @@
+# Environment configuration
+python-dotenv==1.2.1
+
+# Multi-agent orchestration (LangGraph) and LLM integrations
+langchain>=1.2.0
+langchain-community>=0.4.1
+langchain-ollama>=1.0.1
+langchain-text-splitters>=1.1.0
+langgraph>=1.0.5
+langchain-google-genai>=4.1.2
+langchain-qdrant>=1.1.0
+langchain-experimental>=0.3.0
+
+# Retrieval backend
+qdrant-client>=1.16.2
+
+# Web search augmentation (DuckDuckGo, via langchain-community)
+ddgs>=8.1.1
+
+# API server
+fastapi>=0.116.1
+uvicorn>=0.35.0
+pydantic>=2.12.5
+
+# Visualization insight generation
+altair>=5.0.0
+
+# Utilities
+requests>=2.26,<3.0
+tqdm>=4.66.4
+
+# Web crawling (pipeline/helper/ only, for regenerating viz-generator reference docs)
+firecrawl-py>=4.13.4

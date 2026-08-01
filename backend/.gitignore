@@ -1,0 +1,43 @@
+# macOS
+.DS_Store
+
+# Environments
+.env
+.venv/
+venv/
+ENV/
+env/
+
+# Python bytecode and cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+
+# Test / coverage / type-checker caches
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Logs
+*.log
+logs/
+
+# Editors/IDEs
+.vscode/
+.idea/
+
+# Knowledge base and runtime data (populated locally, see README)
+qdrant_storage/*
+!qdrant_storage/.gitkeep
+session_dumps/*
+!session_dumps/.gitkeep
+study logs/*
+!study logs/.gitkeep

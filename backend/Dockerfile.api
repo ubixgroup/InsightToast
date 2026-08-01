@@ -1,0 +1,25 @@
+FROM python:3.11-slim
+
+ENV PYTHONUNBUFFERED=1 \
+    PYTHONDONTWRITEBYTECODE=1 \
+    PIP_DISABLE_PIP_VERSION_CHECK=1 \
+    APP_HOME=/app
+
+WORKDIR ${APP_HOME}
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    curl \
+    git \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY requirements.txt ./requirements.txt
+
+RUN pip install --no-cache-dir uv \
+    && uv pip install --system -r requirements.txt
+
+COPY . .
+
+EXPOSE 4343
+
+CMD ["python", "-m", "uvicorn", "API.main:app", "--host", "0.0.0.0", "--port", "4343"]

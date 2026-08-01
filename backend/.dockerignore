@@ -1,0 +1,15 @@
+.git
+.gitignore
+.vscode
+.cursor
+.venv
+__pycache__
+**/__pycache__
+**/*.pyc
+**/*.pyo
+**/*.pyd
+*.log
+.env
+session_dumps
+study logs
+qdrant_storage

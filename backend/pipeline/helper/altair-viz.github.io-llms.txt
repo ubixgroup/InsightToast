@@ -1,0 +1,102 @@
+# https://altair-viz.github.io/ llms.txt
+
+- [Vega-Altair Visualization](https://altair-viz.github.io/): Create stunning visualizations using Python's Vega-Altair library.
+- [Altair TopLevelParameter Details](https://altair-viz.github.io/user_guide/generated/core/altair.TopLevelParameter.html): Learn about the TopLevelParameter class in Altair library.
+- [Altair Theme Padding](https://altair-viz.github.io/user_guide/generated/theme/altair.theme.PaddingKwds.html): Guide to Altair theme padding properties and methods.
+- [FieldOneOfPredicate Guide](https://altair-viz.github.io/user_guide/generated/core/altair.FieldOneOfPredicate.html): Overview of FieldOneOfPredicate usage in Altair library.
+- [Code of Conduct](https://altair-viz.github.io/about/code_of_conduct.html): Guidelines for respectful participation and community engagement.
+- [Seattle Weather Visualization](https://altair-viz.github.io/gallery/seattle_weather_interactive.html): Explore Seattle's yearly weather with interactive visualizations.
+- [Point Selection Configuration](https://altair-viz.github.io/user_guide/generated/core/altair.PointSelectionConfig.html): Explore configuration options for Altair point selection.
+- [Altair FacetChart Overview](https://altair-viz.github.io/user_guide/generated/toplevel/altair.FacetChart.html): Explore faceted visualizations with Altair's FacetChart class.
+- [Error Bar Config Options](https://altair-viz.github.io/user_guide/generated/theme/altair.theme.ErrorBarConfigKwds.html): Detailed configuration options for error bars in Altair.
+- [Loess Transform Guide](https://altair-viz.github.io/user_guide/generated/core/altair.LoessTransform.html): Details on configuring and using LoessTransform for visualization.
+- [Selection Resolution Class](https://altair-viz.github.io/user_guide/generated/core/altair.SelectionResolution.html): Explore the altair.SelectionResolution class and its methods.
+- [Altair AxisOrient Guide](https://altair-viz.github.io/user_guide/generated/core/altair.AxisOrient.html): Overview and usage of the AxisOrient class in Altair.
+- [Empirical CDF Visualization](https://altair-viz.github.io/gallery/empirical_cumulative_distribution_function.html): Visualize empirical cumulative distribution functions using Altair library.
+- [Altair Offset Definition](https://altair-viz.github.io/user_guide/generated/core/altair.OffsetDef.html): Learn about the Altair OffsetDef schema and methods.
+- [Point Selection Configurations](https://altair-viz.github.io/user_guide/generated/theme/altair.theme.PointSelectionConfigWithoutTypeKwds.html): Overview of PointSelectionConfig features and configurations.
+- [Altair Parameters & Selections](https://altair-viz.github.io/user_guide/interactions/parameters.html): Explore parameters, selections, and filters in Altair charts.
+- [Altair Description Class](https://altair-viz.github.io/user_guide/generated/channels/altair.Description.html): Overview of the altair.Description class and its parameters.
+- [Mark Area Selection](https://altair-viz.github.io/gallery/select_mark_area.html): Demonstrates using selection interval with mark_area chart
+- [Altair Order Schema](https://altair-viz.github.io/user_guide/generated/channels/altair.Order.html): Overview and details of the altair.Order schema functions.
+- [ChannelAngle Overview](https://altair-viz.github.io/user_guide/generated/typing/altair.typing.ChannelAngle.html): Overview of the ChannelAngle type and its components.
+- [Altair MultiPoint Guide](https://altair-viz.github.io/user_guide/generated/core/altair.MultiPoint.html): Comprehensive guide to the Altair MultiPoint geometry class.
+- [Violin Plot Example](https://altair-viz.github.io/gallery/violin_plot.html): Explore how to create a Violin Plot with Altair.
+- [Layer Repeat Specification](https://altair-viz.github.io/user_guide/generated/core/altair.LayerRepeatSpec.html): Overview of LayerRepeatSpec for visualizing repeated layers.
+- [Altair StackOffset Guide](https://altair-viz.github.io/user_guide/generated/core/altair.StackOffset.html): Overview of altair.StackOffset class and its methods.
+- [Altair Value Definition](https://altair-viz.github.io/user_guide/generated/core/altair.ValueDefnumberwidthheightExprRef.html): Details on altair.ValueDefnumberwidthheightExprRef for encoding.
+- [Altair Text Definition](https://altair-viz.github.io/user_guide/generated/core/altair.TextDef.html): Overview and methods for defining textual elements in Altair.
+- [Altair DSV Data Format](https://altair-viz.github.io/user_guide/generated/core/altair.DsvDataFormat.html): Overview of DSV data format and parameters for Altair.
+- [Radial Gradient Overview](https://altair-viz.github.io/user_guide/generated/core/altair.RadialGradient.html): Explore Altair's RadialGradient for custom visual gradients.
+- [London Tube Map](https://altair-viz.github.io/gallery/london_tube.html): Visual representation of London Tube lines and borough boundaries.
+- [Selection Histogram](https://altair-viz.github.io/gallery/selection_histogram.html): Interactive histogram visualizing selections in data categories.
+- [Cumulative Sum Line Chart](https://altair-viz.github.io/gallery/line_chart_with_cumsum.html): Create line chart visualizing cumulative sum of values.
+- [Altair Secondary Field Def](https://altair-viz.github.io/user_guide/generated/core/altair.SecondaryFieldDef.html): Explore Altair's SecondaryFieldDef for shared scale visualizations.
+- [Altair ResolveKwds](https://altair-viz.github.io/user_guide/generated/theme/altair.theme.ResolveKwds.html): Overview of altair.theme.ResolveKwds parameters and methods.
+- [Interactive Column Selection](https://altair-viz.github.io/gallery/interactive_column_selection.html): Interactive visualizations for selecting and comparing columns.
+- [Scatter Plot with LOESS](https://altair-viz.github.io/gallery/scatter_with_loess.html): Learn to add LOESS trend lines to scatter plots.
+- [Altair NumericMarkPropDef](https://altair-viz.github.io/user_guide/generated/core/altair.NumericMarkPropDef.html): Learn about NumericMarkPropDef methods and class structure in Altair.
+- [Field Equal Predicate](https://altair-viz.github.io/user_guide/generated/core/altair.FieldEqualPredicate.html): Learn how to use FieldEqualPredicate in Altair visualization.
+- [Altair Graticule Guide](https://altair-viz.github.io/user_guide/generated/api/altair.graticule.html): Guide to using Altair's graticule for visualizations.
+- [Geographic Plots Overview](https://altair-viz.github.io/altair-tutorial/notebooks/09-Geographic-plots.html): Explore creating geographic plots using Altair visualization library.
+- [ChannelStrokeWidth Type](https://altair-viz.github.io/user_guide/generated/typing/altair.typing.ChannelStrokeWidth.html): Detailed guide on ChannelStrokeWidth type in Altair visualization.
+- [Altair TopLevelConcatSpec](https://altair-viz.github.io/user_guide/generated/core/altair.TopLevelConcatSpec.html): Detailed guide on Altair's TopLevelConcatSpec visualization.
+- [altair.TextValue Guide](https://altair-viz.github.io/user_guide/generated/channels/altair.TextValue.html): Overview of the altair.TextValue class for text visualization.
+- [Altair Axis Configuration](https://altair-viz.github.io/user_guide/generated/core/altair.Axis.html): Detailed information on configuring Altair axis properties.
+- [Altair Visualization Tutorials](https://altair-viz.github.io/case_studies/index.html): Explore advanced use cases with interactive Altair visualization tutorials.
+- [Altair Conditional Predicate](https://altair-viz.github.io/user_guide/generated/core/altair.ConditionalPredicateValueDefTextExprRef.html): Guide for Conditional Predicate Value Definitions in Altair.
+- [Altair Size Channel](https://altair-viz.github.io/user_guide/generated/channels/altair.Size.html): Explore Altair's Size channel configurations for visualizations.
+- [Altair Encoding Overview](https://altair-viz.github.io/user_guide/generated/core/altair.Encoding.html): Detailed explanation of Altair's Encoding class features and usage.
+- [Simple Strip Plot](https://altair-viz.github.io/gallery/strip_plot.html): Create simple strip plots using Altair visualization library.
+- [Error Bars Visualization](https://altair-viz.github.io/gallery/errorbars_with_std.html): Visualizing error bars with standard deviation for crop yields.
+- [Scale Configuration Parameters](https://altair-viz.github.io/user_guide/generated/theme/altair.theme.ScaleInvalidDataConfigKwds.html): Configuration parameters for ScaleInvalidData in Altair theme.
+- [altair.Predicate Overview](https://altair-viz.github.io/user_guide/generated/core/altair.Predicate.html): Detailed overview of the altair.Predicate class and methods.
+- [Altair BarConfig Guide](https://altair-viz.github.io/user_guide/generated/core/altair.BarConfig.html): Comprehensive guide to Altair BarConfig properties and usage.
+- [Stacked Bar Chart](https://altair-viz.github.io/gallery/stacked_bar_chart.html): Explore a stacked bar chart visualizing 1930s crop yields.
+- [Altair Filter Transform](https://altair-viz.github.io/user_guide/transform/filter.html): Learn how to filter data in Altair visualizations.
+- [altair.NamedData Overview](https://altair-viz.github.io/user_guide/generated/core/altair.NamedData.html): Learn about altair.NamedData for data binding and formatting.
+- [Altair BindRangeKwds Guide](https://altair-viz.github.io/user_guide/generated/theme/altair.theme.BindRangeKwds.html): Comprehensive guide to Altair's BindRangeKwds parameters.
+- [Local Multi Time Unit](https://altair-viz.github.io/user_guide/generated/core/altair.LocalMultiTimeUnit.html): Comprehensive guide on LocalMultiTimeUnit in Altair visualization.
+- [Altair Scale Guide](https://altair-viz.github.io/user_guide/generated/core/altair.Scale.html): Comprehensive guide on Altair scale configurations and usage.
+- [Window Transforms Explained](https://altair-viz.github.io/user_guide/transform/window.html): Explore window transforms for advanced data calculations in Altair.
+- [Altair Aggregate Transform](https://altair-viz.github.io/user_guide/generated/core/altair.AggregateTransform.html): Explains the AggregateTransform function in Altair visualization.
+- [Altair Data Opacity Guide](https://altair-viz.github.io/user_guide/generated/core/altair.ScaleInvalidDataShowAsValueopacity.html): Learn how to handle invalid data opacity in Altair visualizations.
+- [Top K Items Visualization](https://altair-viz.github.io/gallery/top_k_items.html): Visualize top IMDB movies using Altair charting library.
+- [Altair Dataset URLs](https://altair-viz.github.io/user_guide/generated/datasets/altair.datasets.url.html): Retrieve remote dataset URLs from Altair library.
+- [U.S. Airport Point Map](https://altair-viz.github.io/gallery/point_map.html): Visualize U.S. airport locations on state map backgrounds.
+- [Altair Theme StepKwds](https://altair-viz.github.io/user_guide/generated/theme/altair.theme.StepKwds.html): Detailed overview of altair.theme.StepKwds and its methods.
+- [Scale Invalid Data Handling](https://altair-viz.github.io/user_guide/generated/core/altair.ScaleInvalidDataShowAsValuex.html): Explore Altair's scale for handling invalid data values.
+- [Altair OverlayMark Definitions](https://altair-viz.github.io/user_guide/generated/theme/altair.theme.OverlayMarkDefKwds.html): Comprehensive guide to Altair OverlayMark properties and usage.
+- [GeoJsonFeature Overview](https://altair-viz.github.io/user_guide/generated/core/altair.GeoJsonFeature.html): Overview and methods of GeoJsonFeature in Altair visualizations.
+- [Citing Vega-Altair](https://altair-viz.github.io/about/citing.html): Citation guidelines for using Vega-Altair in academia.
+- [Scale Invalid Data Shapes](https://altair-viz.github.io/user_guide/generated/core/altair.ScaleInvalidDataShowAsValueshape.html): Learn how to configure shape representation for invalid data.
+- [String Field Definition](https://altair-viz.github.io/user_guide/generated/core/altair.StringFieldDef.html): Guide to defining string fields in Altair visualizations.
+- [Altair Style Configurations](https://altair-viz.github.io/user_guide/generated/core/altair.StyleConfigIndex.html): Comprehensive guide to Altair style configuration options.
+- [Altair TimeFormat Specifier](https://altair-viz.github.io/user_guide/generated/core/altair.TimeFormatSpecifier.html): Detailed overview of Altair's TimeFormatSpecifier parameters.
+- [Chained When Class](https://altair-viz.github.io/user_guide/generated/api-cls/altair.ChainedWhen.html): Utility class for chaining conditional statements in Altair.
+- [Slope Graph Examples](https://altair-viz.github.io/gallery/slope_graph.html): Illustrative examples of creating slope graphs using Altair.
+- [Extent Transform Overview](https://altair-viz.github.io/user_guide/generated/core/altair.ExtentTransform.html): Details about ExtentTransform in Altair visualizations.
+- [Scatter and Histogram Visualization](https://altair-viz.github.io/gallery/scatter_with_histogram.html): Visualize data with linked scatter plot and histogram interactions.
+- [Altair Detail Schema](https://altair-viz.github.io/user_guide/generated/channels/altair.Detail.html): Overview of Altair's Detail channel definition and parameters.
+- [altair.UrlValue Overview](https://altair-viz.github.io/user_guide/generated/channels/altair.UrlValue.html): Detailed guide on using altair.UrlValue for visualizations.
+- [Altair Radius Channel](https://altair-viz.github.io/user_guide/generated/channels/altair.Radius.html): Explore altair.Radius for encoding data visualizations effectively.
+- [FieldRangePredicate Guide](https://altair-viz.github.io/user_guide/generated/core/altair.FieldRangePredicate.html): Learn how to utilize FieldRangePredicate in Altair visualizations.
+- [Stroke Opacity in Altair](https://altair-viz.github.io/user_guide/generated/channels/altair.StrokeOpacityDatum.html): Explore how to use stroke opacity in Altair visualizations.
+- [LineString Geometry](https://altair-viz.github.io/user_guide/generated/core/altair.LineString.html): Comprehensive guide to the LineString geometry object.
+- [Altair Bin Parameters](https://altair-viz.github.io/user_guide/generated/core/altair.BinParams.html): Detailed parameters for configuring data binning in Altair.
+- [Arc Marks Overview](https://altair-viz.github.io/user_guide/marks/arc.html): Detailed guide on creating arc marks with Altair visualization.
+- [ParameterExtent Class Overview](https://altair-viz.github.io/user_guide/generated/core/altair.ParameterExtent.html): Overview and methods of altair.ParameterExtent for data visualization.
+- [Altair Fill Channel](https://altair-viz.github.io/user_guide/generated/channels/altair.Fill.html): Comprehensive guide to Altair Fill channel specifications.
+- [Altair Radius2 Channel](https://altair-viz.github.io/user_guide/generated/channels/altair.Radius2.html): Overview of Radius2 channel in Altair visualization library.
+- [Altair Encoding Channels](https://altair-viz.github.io/user_guide/encodings/channels.html): Explore Altair encoding channels for effective data visualization.
+- [Altair StrokeDash](https://altair-viz.github.io/user_guide/generated/channels/altair.StrokeDash.html): Explore the StrokeDash class for Altair visualizations.
+- [Ranged Dot Plot](https://altair-viz.github.io/gallery/ranged_dot_plot.html): Visualize life expectancy data for five populous countries.
+- [Altair URI Overview](https://altair-viz.github.io/user_guide/generated/core/altair.URI.html): Comprehensive guide to the Altair URI schema implementation.
+- [Interactive Chart](https://altair-viz.github.io/gallery/interactive_aggregation.html): Interactive chart demonstrating data aggregation with slider control.
+- [Linked Scatter Matrix](https://altair-viz.github.io/gallery/scatter_matrix.html): Create linked scatter plots with Altair's RepeatChart feature.
+- [Field Condition Definition](https://altair-viz.github.io/user_guide/generated/core/altair.FieldOrDatumDefWithConditionStringFieldDefText.html): Explore the FieldOrDatumDefWithCondition for text data.
+- [Conditional Axis Label Align](https://altair-viz.github.io/user_guide/generated/core/altair.ConditionalAxisLabelAlign.html): Learn about ConditionalAxisLabelAlign class in Altair visualization.
+- [Altair DatumDef Overview](https://altair-viz.github.io/user_guide/generated/core/altair.DatumDef.html): Detailed documentation on the altair.DatumDef class functionality.
+- [Altair ImputeParams Guide](https://altair-viz.github.io/user_guide/generated/core/altair.ImputeParams.html): Comprehensive guide to Altair ImputeParams usage and methods.
+- [Altair UnitSpec Documentation](https://altair-viz.github.io/user_guide/generated/core/altair.UnitSpecWithFrame.html): Guide to constructing visualizations using Altair UnitSpecWithFrame.
+- [Gradient Area Chart](https://altair-viz.github.io/gallery/area_chart_gradient.html): Create stunning area charts with gradient fills using Altair.
