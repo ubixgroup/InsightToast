@@ -4,6 +4,10 @@
 
 # <img src="assets/logo.svg" alt="" width="40" height="40" align="center"> InsightToast
 
+**ACM UIST 2026**
+
+[![arXiv](https://img.shields.io/badge/arXiv-2608.31115-b31b1b)](https://arxiv.org/abs/2608.31115) [![Live Demo](https://img.shields.io/badge/Live_Demo-Visit-2563eb)](https://insighttoast.vercel.app/) [![Video Figure](https://img.shields.io/badge/Video_Figure-Watch-ff0000)](https://www.youtube.com/watch?v=CMbtV4WmXAA) [![Knowledgebase Dataset](https://img.shields.io/badge/Knowledgebase_Dataset-View-00897b)](https://www.youtube.com/watch?v=CMbtV4WmXAA)
+
 This repository contains the system implementation accompanying the paper:
 
 > **InsightToast: Proactive Information Retrieval & Glanceable Visualization in the Side Channel of Data-Rich Meetings**
@@ -13,7 +17,7 @@ This repository contains the system implementation accompanying the paper:
 
 University of Waterloo, UBIX Research Group.
 
-**Live demo:** [insighttoast.vercel.app](https://insighttoast.vercel.app/)
+**Contents:** [Abstract](#abstract) · [System overview](#system-overview) · [Repository structure](#repository-structure) · [Getting started](#getting-started) · [Dataset](#dataset-and-knowledge-base) · [Citation](#citation)
 
 ## Abstract
 
