@@ -2,22 +2,31 @@
   <img src="assets/teaser.png" alt="InsightToast teaser figure" width="100%">
 </p>
 
-# <img src="assets/logo.svg" alt="" width="40" height="40" align="center"> InsightToast
+<h1 align="center"><img src="assets/logo.svg" alt="" width="40" height="40" align="center"> InsightToast</h1>
 
-**ACM UIST 2026**
+<p align="center"><strong>ACM UIST 2026</strong></p>
 
-[![arXiv](https://img.shields.io/badge/arXiv-2608.31115-b31b1b)](https://arxiv.org/abs/2608.31115) [![Live Demo](https://img.shields.io/badge/Live_Demo-Visit-2563eb)](https://insighttoast.vercel.app/) [![Video Figure](https://img.shields.io/badge/Video_Figure-Watch-ff0000)](https://www.youtube.com/watch?v=CMbtV4WmXAA) [![Knowledgebase Dataset](https://img.shields.io/badge/Knowledgebase_Dataset-View-00897b)](https://www.youtube.com/watch?v=CMbtV4WmXAA)
+<p align="center">
+  <a href="https://arxiv.org/abs/2608.31115"><img src="https://img.shields.io/badge/arXiv-2608.31115-b31b1b" alt="arXiv"></a>
+  <a href="https://insighttoast.vercel.app/"><img src="https://img.shields.io/badge/Live_Demo-Visit-2563eb" alt="Live Demo"></a>
+  <a href="https://www.youtube.com/watch?v=CMbtV4WmXAA"><img src="https://img.shields.io/badge/Video_Figure-Watch-ff0000" alt="Video Figure"></a>
+  <a href="https://www.youtube.com/watch?v=CMbtV4WmXAA"><img src="https://img.shields.io/badge/Knowledgebase_Dataset-View-00897b" alt="Knowledgebase Dataset"></a>
+</p>
 
-This repository contains the system implementation accompanying the paper:
+<p align="center">This repository contains the system implementation accompanying the paper:</p>
 
-> **InsightToast: Proactive Information Retrieval & Glanceable Visualization in the Side Channel of Data-Rich Meetings**
-> Mohammad Abolnejadian and Matthew Brehmer
-> *Proceedings of the 39th Annual ACM Symposium on User Interface Software and Technology (UIST '26)*
-> DOI: [10.1145/3830398.3830522](https://doi.org/10.1145/3830398.3830522)
+<p align="center">
+  <strong>InsightToast: Proactive Information Retrieval &amp; Glanceable Visualization in the Side Channel of Data-Rich Meetings</strong><br>
+  Mohammad Abolnejadian and Matthew Brehmer<br>
+  <em>Proceedings of the 39th Annual ACM Symposium on User Interface Software and Technology (UIST '26)</em><br>
+  DOI: <a href="https://doi.org/10.1145/3830398.3830522">10.1145/3830398.3830522</a>
+</p>
 
-University of Waterloo, UBIX Research Group.
+<p align="center">University of Waterloo, UBIX Research Group.</p>
 
-**Contents:** [Abstract](#abstract) · [System overview](#system-overview) · [Repository structure](#repository-structure) · [Getting started](#getting-started) · [Dataset](#dataset-and-knowledge-base) · [Citation](#citation)
+<p align="center">
+  <strong>Contents:</strong> <a href="#abstract">Abstract</a> · <a href="#system-overview">System overview</a> · <a href="#repository-structure">Repository structure</a> · <a href="#getting-started">Getting started</a> · <a href="#dataset-and-knowledge-base">Dataset</a> · <a href="#citation">Citation</a>
+</p>
 
 ## Abstract
 
