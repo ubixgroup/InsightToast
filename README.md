@@ -10,7 +10,7 @@
   <a href="https://arxiv.org/abs/2608.31115"><img src="https://img.shields.io/badge/arXiv-2608.31115-b31b1b" alt="arXiv"></a>
   <a href="https://insighttoast.vercel.app/"><img src="https://img.shields.io/badge/Live_Demo-Visit-2563eb" alt="Live Demo"></a>
   <a href="https://www.youtube.com/watch?v=CMbtV4WmXAA"><img src="https://img.shields.io/badge/Video_Figure-Watch-ff0000" alt="Video Figure"></a>
-  <a href="https://www.youtube.com/watch?v=CMbtV4WmXAA"><img src="https://img.shields.io/badge/Knowledgebase_Dataset-View-00897b" alt="Knowledgebase Dataset"></a>
+  <a href="https://zenodo.org/records/21502545"><img src="https://img.shields.io/badge/Knowledgebase_Dataset-View-00897b" alt="Knowledgebase Dataset"></a>
 </p>
 
 <p align="center">This repository contains the system implementation accompanying the paper:</p>
