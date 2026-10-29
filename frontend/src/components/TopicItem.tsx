@@ -87,8 +87,6 @@ export function TopicItem({
     onboardingForceCollapseChartsToken,
 }: TopicItemProps) {
     const cardRef = useRef<HTMLDivElement>(null);
-    const insightRegisterCallbacksRef = useRef<Map<string, (el: HTMLElement | null) => void>>(new Map());
-
     // Current time for relative timestamps (updates every minute)
     const [now, setNow] = useState(() => new Date());
 
@@ -162,16 +160,20 @@ export function TopicItem({
         return Boolean(selection && !selection.isCollapsed && selection.toString().trim().length > 0);
     };
 
+    const insightRegisterCallbacks = useMemo(() => {
+        const map = new Map<string, (el: HTMLElement | null) => void>();
+        for (const insight of sortedInsights) {
+            map.set(insight.id, (el: HTMLElement | null) => {
+                registerInsightRef(insight.id, el);
+            });
+        }
+        return map;
+    }, [sortedInsights, registerInsightRef]);
+
     const getInsightRegisterRef = (insightId: string) => {
-        const existing = insightRegisterCallbacksRef.current.get(insightId);
-        if (existing) return existing;
-
-        const callback = (el: HTMLElement | null) => {
+        return insightRegisterCallbacks.get(insightId) ?? ((el: HTMLElement | null) => {
             registerInsightRef(insightId, el);
-        };
-
-        insightRegisterCallbacksRef.current.set(insightId, callback);
-        return callback;
+        });
     };
 
     // Get timestamp string for an insight

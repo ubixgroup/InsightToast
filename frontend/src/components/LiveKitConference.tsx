@@ -343,6 +343,10 @@ export const LiveKitConference = forwardRef<
     const [error, setError] = useState<string | null>(null);
     const [retryCount, setRetryCount] = useState(0);
     const innerRef = useRef<LiveKitConferenceHandle | null>(null);
+    const onErrorRef = useRef(onError);
+    useEffect(() => {
+        onErrorRef.current = onError;
+    }, [onError]);
 
     // Expose disconnect + mic/camera toggles to parent via forwarded ref  
     useImperativeHandle(ref, () => ({
@@ -384,7 +388,7 @@ export const LiveKitConference = forwardRef<
                 const message = err instanceof Error ? err.message : "Failed to fetch LiveKit token";
                 setError(message);
                 console.error("[LK] token fetch error", err);
-                onError?.(message);
+                onErrorRef.current?.(message);
             } finally {
                 if (!cancelled) setIsLoading(false);
             }

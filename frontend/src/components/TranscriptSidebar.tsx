@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState, useEffect, useRef } from "react";
+import { useMemo, useState, useEffect, useRef, useCallback } from "react";
 import { Box, Text, Stack, VStack, HStack, Avatar } from "@chakra-ui/react";
 import { EmbeddedWebViewer } from "./EmbeddedWebViewer";
 import { formatTimestamp, getChunkDisplayTime } from "@/utils/formatTimestamp";
@@ -179,17 +179,17 @@ export function TranscriptSidebar({
     }, [chunks, visibleChunkIndices, displayMode, chunkToTopicMap, currentTopicId, expandedTopicChunks, selectedInsightChunkIndex]);
 
     // Handle clicking on grey text (go back to topic mode)
-    const handleGreyTextClick = () => {
+    const handleGreyTextClick = useCallback(() => {
         onContextChunkClick?.();
         onClearProvenanceSelection();
-    };
+    }, [onContextChunkClick, onClearProvenanceSelection]);
 
     // Handle clicking on ellipsis (go back to all mode)
-    const handleEllipsisClick = () => {
+    const handleEllipsisClick = useCallback(() => {
         onEllipsisClick?.();
         onClearProvenanceSelection();
         onClearExpandedTopic();
-    };
+    }, [onEllipsisClick, onClearProvenanceSelection, onClearExpandedTopic]);
 
     // Group consecutive ellipsis markers
     const renderedItems = useMemo(() => {
@@ -281,7 +281,7 @@ export function TranscriptSidebar({
         });
 
         return items;
-    }, [displayChunks, pageLoadTime, now]);
+    }, [displayChunks, pageLoadTime, now, handleEllipsisClick, handleGreyTextClick]);
 
     return (
         <Box

@@ -141,7 +141,8 @@ function adjustSpecForSidebar(
                 // labelOffset: 4,
             };
         } else if (key === "axis" && typeof value === "object" && value !== null) {
-            const { labelAngle, ...axisRest } = value as Record<string, unknown>;
+            const axisRest = { ...(value as Record<string, unknown>) };
+            delete axisRest.labelAngle;
 
             // Determine rotation based on which encoding channel we're in
             let angle: number | undefined = undefined;
@@ -232,17 +233,22 @@ export function VizInsightCard({
 }: VizInsightCardProps) {
     const cardRef = useRef<HTMLDivElement>(null);
     const [isChartExpanded, setIsChartExpanded] = useState(false);
-    const lastForceCollapseKeyRef = useRef<number | undefined>(forceCollapseKey);
+    const [prevForceCollapseKey, setPrevForceCollapseKey] = useState<number | undefined>(forceCollapseKey);
+    const lastNotifiedCollapseKeyRef = useRef<number | undefined>(forceCollapseKey);
+
+    if (forceCollapseKey !== undefined && prevForceCollapseKey !== forceCollapseKey) {
+        setPrevForceCollapseKey(forceCollapseKey);
+        if (isChartExpanded) {
+            setIsChartExpanded(false);
+        }
+    }
 
     useEffect(() => {
         if (forceCollapseKey === undefined) return;
-        if (lastForceCollapseKeyRef.current === forceCollapseKey) return;
-
-        lastForceCollapseKeyRef.current = forceCollapseKey;
-        if (!isChartExpanded) return;
-        setIsChartExpanded(false);
+        if (lastNotifiedCollapseKeyRef.current === forceCollapseKey) return;
+        lastNotifiedCollapseKeyRef.current = forceCollapseKey;
         onExpandChange?.(false);
-    }, [forceCollapseKey, isChartExpanded, onExpandChange]);
+    }, [forceCollapseKey, onExpandChange]);
 
     // Register the card element for visibility tracking
     useEffect(() => {
@@ -483,6 +489,7 @@ export function VizInsightCard({
     );
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export function buildVizSidebarSpec(insight: VizInsight): VisualizationSpec {
     const baseData = insight.data as Record<string, unknown> | undefined;
     if (!baseData || typeof baseData !== "object") {

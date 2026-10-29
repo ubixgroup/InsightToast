@@ -57,6 +57,11 @@ export function ShimmerText({
     lineClamp,
     isActive = true,
 }: ShimmerTextProps) {
+    const shimmerGradient = useColorModeValue(
+        "linear-gradient(90deg, var(--chakra-colors-fg) 20%, var(--chakra-colors-gray-400) 50%, var(--chakra-colors-fg) 80%)",
+        "linear-gradient(90deg, var(--chakra-colors-fg) 25%, var(--chakra-colors-fg-muted) 50%, var(--chakra-colors-fg) 75%)"
+    );
+
     if (!isActive) {
         return (
             <Text fontSize={fontSize} fontWeight={fontWeight} color={color} lineClamp={lineClamp}>
@@ -64,11 +69,6 @@ export function ShimmerText({
             </Text>
         );
     }
-
-    const shimmerGradient = useColorModeValue(
-        "linear-gradient(90deg, var(--chakra-colors-fg) 20%, var(--chakra-colors-gray-400) 50%, var(--chakra-colors-fg) 80%)",
-        "linear-gradient(90deg, var(--chakra-colors-fg) 25%, var(--chakra-colors-fg-muted) 50%, var(--chakra-colors-fg) 75%)"
-    );
 
     return (
         <Box

@@ -32,18 +32,10 @@ export function VideoPlayer({
         webcamStreamRef.current = webcamStream;
     }, [webcamStream]);
 
-    // Start webcam
-    const startWebcam = async () => {
-        try {
-            const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-            webcamStreamRef.current = stream;
-            setWebcamStream(stream);
-            setWebcamError(false);
-        } catch {
-            setWebcamError(true);
-            onCameraPermissionDenied?.();
-        }
-    };
+    const onCameraPermissionDeniedRef = useRef(onCameraPermissionDenied);
+    useEffect(() => {
+        onCameraPermissionDeniedRef.current = onCameraPermissionDenied;
+    }, [onCameraPermissionDenied]);
 
     // Stop webcam
     const stopWebcam = useCallback(() => {
@@ -64,15 +56,41 @@ export function VideoPlayer({
 
     // Keep webcam stream in sync with external camera state.
     useEffect(() => {
+        let cancelled = false;
+
         if (isCameraOn) {
             if (!webcamStreamRef.current) {
-                void startWebcam();
+                navigator.mediaDevices
+                    .getUserMedia({ video: true })
+                    .then((stream) => {
+                        if (cancelled) {
+                            stream.getTracks().forEach((track) => track.stop());
+                            return;
+                        }
+                        webcamStreamRef.current = stream;
+                        setWebcamStream(stream);
+                        setWebcamError(false);
+                    })
+                    .catch(() => {
+                        if (cancelled) return;
+                        setWebcamError(true);
+                        onCameraPermissionDeniedRef.current?.();
+                    });
             }
-            return;
+            return () => {
+                cancelled = true;
+            };
         }
 
-        stopWebcam();
-    }, [isCameraOn, stopWebcam]);
+        const activeStream = webcamStreamRef.current;
+        if (activeStream) {
+            activeStream.getTracks().forEach((track) => track.stop());
+            webcamStreamRef.current = null;
+        }
+        return () => {
+            cancelled = true;
+        };
+    }, [isCameraOn]);
 
     useEffect(() => {
         return () => {

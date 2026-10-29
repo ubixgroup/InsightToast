@@ -153,11 +153,15 @@ export function useProgressToast({
 
     // Cleanup timers on unmount
     useEffect(() => {
+        const dismissTimersMap = dismissTimers.current;
+        const bannerTimersMap = bannerTimers.current;
+        const exitToastTimersMap = exitToastTimers.current;
+        const exitBannerTimersMap = exitBannerTimers.current;
         return () => {
-            dismissTimers.current.forEach((timer) => clearTimeout(timer));
-            bannerTimers.current.forEach((timer) => clearTimeout(timer));
-            exitToastTimers.current.forEach((timer) => clearTimeout(timer));
-            exitBannerTimers.current.forEach((timer) => clearTimeout(timer));
+            dismissTimersMap.forEach((timer) => clearTimeout(timer));
+            bannerTimersMap.forEach((timer) => clearTimeout(timer));
+            exitToastTimersMap.forEach((timer) => clearTimeout(timer));
+            exitBannerTimersMap.forEach((timer) => clearTimeout(timer));
             clearSimulationTimers();
         };
     }, [clearSimulationTimers]);

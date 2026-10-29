@@ -1,4 +1,4 @@
-import { useState, useCallback, useRef, useEffect } from "react";
+import { useState, useCallback, useRef, useEffect, useMemo } from "react";
 import type { Step } from "react-joyride";
 import type { ProgressStage } from "@/types/progressToast";
 import type { Insight } from "@/types";
@@ -653,6 +653,7 @@ export function useOnboarding({ isReady }: UseOnboardingOptions): UseOnboardingR
     const [phase, setPhase] = useState<OnboardingPhase>("idle");
     const [stepIndex, setStepIndex] = useState(0);
     const [run, setRun] = useState(false);
+    const [hasStarted, setHasStarted] = useState(false);
     const [progressSubtext, setProgressSubtext] = useState(PROGRESS_SUBTEXT.generating);
     const [regeneratedInsightsMode, setRegeneratedInsightsMode] = useState<RegeneratedInsightsMode>("sidebar-final");
     const [regeneratedInsightsSubtext, setRegeneratedInsightsSubtext] = useState(REGENERATED_SUBTEXT["sidebar-final"]);
@@ -663,7 +664,6 @@ export function useOnboarding({ isReady }: UseOnboardingOptions): UseOnboardingR
 
     // Internal refs for tracking
     const bannerCountRef = useRef(0);
-    const hasStartedRef = useRef(false);
     const progressStageRef = useRef<ProgressStage | null>(null);
     const waitingForSidebarRef = useRef(false);
     const waitingForPreviewRef = useRef(false);
@@ -673,7 +673,7 @@ export function useOnboarding({ isReady }: UseOnboardingOptions): UseOnboardingR
     const latestRegeneratedTextInsightIdRef = useRef<string | null>(null);
     const regeneratedTextInsightIdsRef = useRef<Set<string>>(new Set());
 
-    const steps = useRef(buildSteps()).current;
+    const steps = useMemo(() => buildSteps(), []);
 
     const clearPendingTimeouts = useCallback(() => {
         timeoutIdsRef.current.forEach((id) => window.clearTimeout(id));
@@ -824,13 +824,12 @@ export function useOnboarding({ isReady }: UseOnboardingOptions): UseOnboardingR
     }, [regeneratedInsightsMode]);
 
     // Auto-start when ready
-    useEffect(() => {
-        if (isReady && !hasStartedRef.current) {
-            hasStartedRef.current = true;
-            gotoStepPhase("welcome");
-            setRun(true);
-        }
-    }, [isReady, gotoStepPhase]);
+    if (isReady && !hasStarted) {
+        setHasStarted(true);
+        setPhase("welcome");
+        setStepIndex(STEP_PHASE_TO_INDEX.welcome);
+        setRun(true);
+    }
 
     useEffect(() => {
         return () => {

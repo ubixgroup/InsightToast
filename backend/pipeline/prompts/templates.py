@@ -139,8 +139,8 @@ DECISION RULES
 
 **Rule 2: Mixed Content Handling**
 - If chunk has BOTH procedural and substantive content:
-  * If substantive portion is <20\% of chunk → FILTER (is_procedural: true)
-  * If substantive portion is ≥20\% of chunk → PASS THROUGH (is_procedural: false)
+  * If substantive portion is <20% of chunk → FILTER (is_procedural: true)
+  * If substantive portion is ≥20% of chunk → PASS THROUGH (is_procedural: false)
 - Example: "Good morning everyone. [FILTERED] Let's discuss the carbon tax impact on farmers [SUBSTANTIVE]" → PASS THROUGH
 
 **Rule 3: Context Consideration**

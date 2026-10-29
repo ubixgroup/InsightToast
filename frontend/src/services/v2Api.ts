@@ -188,6 +188,14 @@ function normalizeBaseUrl(url: string): string {
     return url.endsWith("/") ? url.slice(0, -1) : url;
 }
 
+function getBaseUrl(): string {
+    const baseUrl = import.meta.env.VITE_API_BASE_URL as string | undefined;
+    if (!baseUrl) {
+        throw new Error("Missing VITE_API_BASE_URL in environment.");
+    }
+    return normalizeBaseUrl(baseUrl);
+}
+
 function getConfig() {
     const baseUrl = import.meta.env.VITE_API_BASE_URL as string | undefined;
     const apiKey = import.meta.env.VITE_APP_API_KEY as string | undefined;
@@ -507,7 +515,7 @@ export async function chatWithClientV2(input: {
 export async function validateAdminPasswordV2(input: {
     adminPassword: string;
 }): Promise<{ is_valid: boolean }> {
-    const { baseUrl } = getConfig();
+    const baseUrl = getBaseUrl();
 
     const response = await fetch(`${baseUrl}/v2/admin/validate-password`, {
         method: "POST",
@@ -521,7 +529,7 @@ export async function registerConversationsV2(input: {
     adminPassword: string;
     conversationIds: string[];
 }): Promise<RegisterConversationsResponse> {
-    const { baseUrl } = getConfig();
+    const baseUrl = getBaseUrl();
 
     const response = await fetch(`${baseUrl}/v2/admin/register-conversations`, {
         method: "POST",
@@ -537,7 +545,7 @@ export async function registerConversationsV2(input: {
 export async function listConversationsV2(input: {
     adminPassword: string;
 }): Promise<ListConversationsResponse> {
-    const { baseUrl } = getConfig();
+    const baseUrl = getBaseUrl();
 
     const response = await fetch(`${baseUrl}/v2/admin/conversations`, {
         method: "GET",
@@ -551,7 +559,7 @@ export async function generateApiKeyV2(input: {
     adminPassword: string;
     name?: string;
 }): Promise<GenerateApiKeyResponse> {
-    const { baseUrl } = getConfig();
+    const baseUrl = getBaseUrl();
 
     const response = await fetch(`${baseUrl}/v2/admin/api-keys/generate`, {
         method: "POST",
@@ -567,7 +575,7 @@ export async function generateApiKeyV2(input: {
 export async function listAdminApiKeysV2(input: {
     adminPassword: string;
 }): Promise<ListApiKeysResponse> {
-    const { baseUrl } = getConfig();
+    const baseUrl = getBaseUrl();
 
     const response = await fetch(`${baseUrl}/v2/admin/api-keys`, {
         method: "GET",
@@ -581,7 +589,7 @@ export async function revokeApiKeyV2(input: {
     adminPassword: string;
     keyId: string;
 }): Promise<RevokeApiKeyResponse> {
-    const { baseUrl } = getConfig();
+    const baseUrl = getBaseUrl();
 
     const response = await fetch(`${baseUrl}/v2/admin/api-keys/revoke`, {
         method: "POST",

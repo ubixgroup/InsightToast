@@ -182,7 +182,9 @@ export function OnboardingTour({
 }: OnboardingTourProps) {
     // Use a ref so the stable tooltip component always reads the latest callback
     const advanceRef = useRef(onAdvanceProgress);
-    advanceRef.current = onAdvanceProgress;
+    useEffect(() => {
+        advanceRef.current = onAdvanceProgress;
+    }, [onAdvanceProgress]);
 
     // Stable tooltip component — never recreated, reads latest callback via ref
     const TooltipComponent = useMemo(

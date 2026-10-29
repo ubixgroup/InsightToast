@@ -19,35 +19,6 @@ declare global {
 let scriptLoaded = false;
 let scriptLoadPromise: Promise<void> | null = null;
 let cssLoaded = false;
-let pdfJsLoaded = false;
-let pdfJsLoadPromise: Promise<void> | null = null;
-
-const PDFJS_VERSION = "4.9.155";
-const PDFJS_CDN = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${PDFJS_VERSION}`;
-
-/** Load pdfjs-dist from CDN once (sets globalThis.pdfjsLib) */
-function loadPdfJs(): Promise<void> {
-    if (pdfJsLoaded) return Promise.resolve();
-    if (pdfJsLoadPromise) return pdfJsLoadPromise;
-    pdfJsLoadPromise = new Promise<void>((resolve, reject) => {
-        const script = document.createElement("script");
-        script.type = "module";
-        script.src = `${PDFJS_CDN}/pdf.min.mjs`;
-        script.onload = () => {
-            const lib = (globalThis as Record<string, unknown>).pdfjsLib as
-                | { GlobalWorkerOptions: { workerSrc: string } }
-                | undefined;
-            if (lib) {
-                lib.GlobalWorkerOptions.workerSrc = `${PDFJS_CDN}/pdf.worker.min.mjs`;
-            }
-            pdfJsLoaded = true;
-            resolve();
-        };
-        script.onerror = () => reject(new Error("Failed to load pdf.js from CDN"));
-        document.head.appendChild(script);
-    });
-    return pdfJsLoadPromise;
-}
 
 /** Load the macos-demo CSS once from public/macos-demo/ */
 function loadMacOSStyles(): void {
@@ -97,7 +68,6 @@ export default function MacOSDesktop({ desktopFiles }: MacOSDesktopProps) {
         let cancelled = false;
 
         loadMacOSStyles();
-        loadPdfJs().catch(() => { /* pdf.js load failed */ });
         loadMacOSScript().then(() => {
             if (cancelled || !el || mountedRef.current) return;
             if (window.mountMacOS) {

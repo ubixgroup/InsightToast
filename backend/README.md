@@ -55,16 +55,17 @@ Then edit `.env`:
 | `GOOGLE_API_KEY` | Yes | Google Cloud API key for Gemini. |
 | `ADMIN_PASSWORD` | Yes | Password for admin endpoints, used to generate API keys. Change from the default. |
 | `FRONTEND_GOOGLE_API_KEY` | Yes, for the chat endpoint | Google Cloud API key used by `POST /v2/conversations/{id}/chat`. Can be the same value as `GOOGLE_API_KEY`. |
-| `QDRANT_URL` | No | Auto-set by Docker Compose (`http://qdrant:6333`). |
-| `OLLAMA_BASE_URL` | No | Auto-set by Docker Compose (`http://ollama:11434`). |
-| `OLLAMA_HOST_PORT` | No | Host port for Ollama. Default: `11435`. |
+| `LIVEKIT_API_KEY` / `LIVEKIT_API_SECRET` / `LIVEKIT_URL` | Yes, for frontend remote sessions | LiveKit credentials for video conferencing in remote interactive sessions (`/interactive/remote/*`). |
+| `DEEPGRAM_API_KEY` | Yes, for frontend remote sessions | Deepgram API key for live speech-to-text in remote interactive sessions (`/interactive/remote/*`). |
+| `SPEECHMATICS_API_KEY` | Yes, for frontend co-located sessions | Speechmatics API key for speaker voiceprint enrollment and diarized STT in co-located interactive sessions (`/interactive/colocated/*`). |
+| `QDRANT_URL` | No | Auto-set by Docker Compose (`http://qdrant:6333`); defaults to `http://localhost:6333` for local runs. |
+| `OLLAMA_BASE_URL` | No | Auto-set by Docker Compose (`http://ollama:11434`); defaults to `http://localhost:11434` for local runs. |
+| `API_HOST_PORT` / `QDRANT_HOST_PORT` / `OLLAMA_HOST_PORT` | No | Host port overrides for API (`4343`), Qdrant (`6333`), and Ollama (`11435`). |
 | `QDRANT_COLLECTION` | No | Name of the Qdrant collection to query. Default: `parliament_documents`. |
 | `OLLAMA_EMBEDDING_MODEL` | No | Embedding model to auto-pull. Default: `embeddinggemma:latest`. |
 | `OLLAMA_MAIN_MODEL` | No | Local LLM to auto-pull. Default: `gemma3:12b`. |
 | `V2_UNREGISTERED_CONVERSATION_TTL_SECONDS` | No | TTL for conversations created without prior registration, in seconds. Default: `900`. |
 | `FIRECRAWL_API_KEY` | No | Only needed to regenerate the viz-generator reference docs in `pipeline/helper/`, not needed to run the pipeline. |
-| `LIVEKIT_API_KEY` / `LIVEKIT_API_SECRET` / `LIVEKIT_URL` | No | For real-time audio ingestion clients. |
-| `DEEPGRAM_API_KEY` / `SPEECHMATICS_API_KEY` | No | Optional ASR providers for audio clients. |
 
 ### 2. Knowledge base (Qdrant)
 

@@ -36,10 +36,10 @@ To view the demo without any backend setup, skip the `.env` configuration and na
 
 | Variable | Description |
 |---|---|
-| `VITE_APP_API_KEY` | API key for authenticating with the backend service. See `../backend`, `POST /v2/admin/api-keys`. |
-| `VITE_API_BASE_URL` | Base URL of the backend API server. |
+| `VITE_APP_API_KEY` | API key for authenticating with the backend service. Generate via `/admin` or `POST /v2/admin/api-keys/generate` (see `../backend`). |
+| `VITE_API_BASE_URL` | Base URL of the backend API server (e.g., `http://localhost:4343`). |
 | `VITE_LIVEKIT_URL` | LiveKit server WebSocket URL, used for video conferencing in remote sessions. A free-tier [LiveKit Cloud](https://cloud.livekit.io/) account provides sufficient credits. |
-| `VITE_DEMO_ID` | Conversation ID to join automatically on load, for presenting a live or pre-populated session. |
+| `VITE_DEMO_ID` | Optional conversation ID to join automatically in `/demo` for enabling live knowledge-base search and text explanation alongside the recorded playback. |
 
 These variables are only required for interactive (live) sessions. The demo mode at `/demo` works without any configuration.
 

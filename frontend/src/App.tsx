@@ -483,8 +483,10 @@ export default function App({ onBack }: DemoAppProps) {
     }
   }, [onboarding.phase]);
 
+  const { phase: onboardingPhase, handlePlaybackCheckpointReached } = onboarding;
+
   useEffect(() => {
-    if (onboarding.phase !== "waiting-for-topic-checkpoint") {
+    if (onboardingPhase !== "waiting-for-topic-checkpoint") {
       return;
     }
 
@@ -498,7 +500,7 @@ export default function App({ onBack }: DemoAppProps) {
       if (didAdvance) return;
       didAdvance = true;
       videoEl.pause();
-      onboarding.handlePlaybackCheckpointReached();
+      handlePlaybackCheckpointReached();
     };
 
     // Lock the checkpoint from the current playback position once for this phase entry.
@@ -528,7 +530,7 @@ export default function App({ onBack }: DemoAppProps) {
     return () => {
       window.clearInterval(timer);
     };
-  }, [chunks, onboarding.phase, onboarding.handlePlaybackCheckpointReached]);
+  }, [chunks, onboardingPhase, handlePlaybackCheckpointReached]);
 
   // Onboarding: after CC toggle, resume playback so regenerated insights can be generated.
   useEffect(() => {

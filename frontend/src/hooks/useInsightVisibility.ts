@@ -171,6 +171,7 @@ export function useInsightVisibility(
 
     // Initialize Intersection Observer once (stable reference via ref)
     useEffect(() => {
+        const timers = viewingTimers.current;
         observerRef.current = new IntersectionObserver(
             (entries) => handleIntersectionRef.current?.(entries),
             {
@@ -187,8 +188,8 @@ export function useInsightVisibility(
         return () => {
             observerRef.current?.disconnect();
             // Clear all timers on unmount
-            viewingTimers.current.forEach((timer) => clearTimeout(timer));
-            viewingTimers.current.clear();
+            timers.forEach((timer) => clearTimeout(timer));
+            timers.clear();
         };
     }, []); // Empty deps - observer created once
 

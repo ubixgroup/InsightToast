@@ -7,10 +7,10 @@ Tests the pipeline with sample transcript chunks using the streaming interface.
 import sys
 import os
 
-# Add parent directory to path for imports
-sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+# Add pipeline directory to path for imports
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
-from run import ConversationManager, process_single_chunk, EventType, PipelineEvent
+from run import ConversationManager, process_single_chunk
 from config import get_default_config
 from models.state import TranscriptInput
 
@@ -21,9 +21,15 @@ def consume_generator(generator):
     events = []
     try:
         while True:
-            event = next(generator)
-            events.append(event)
-            print(f"    [{event.event_type.value}] {event.node_name}")
+            update = next(generator)
+            events.append(update)
+            if (
+                isinstance(update, tuple)
+                and len(update) == 2
+                and isinstance(update[1], dict)
+            ):
+                node_names = ", ".join(update[1].keys())
+                print(f"    [update] {node_names}")
     except StopIteration as e:
         final_output = e.value
     return final_output, events
@@ -57,15 +63,16 @@ def test_single_chunk_processing():
             print(f"Topic: {result.current_topic_name or 'None'}")
             print(f"Meeting Title: {result.meeting_title or 'Not set'}")
 
-            if result.generated_insight:
-                print(f"\nGenerated Insight:")
-                print(f"  Type: {result.generated_insight.get('type')}")
-                content = result.generated_insight.get("content", "")
-                print(
-                    f"  Content: {content[:200]}..."
-                    if len(content) > 200
-                    else f"  Content: {content}"
-                )
+            if result.generated_insights:
+                for insight in result.generated_insights:
+                    print(f"\nGenerated Insight:")
+                    print(f"  Type: {insight.get('type')}")
+                    content = insight.get("content") or insight.get("explanation", "")
+                    print(
+                        f"  Content: {content[:200]}..."
+                        if len(content) > 200
+                        else f"  Content: {content}"
+                    )
             else:
                 print("\nNo insight generated")
 
@@ -102,14 +109,21 @@ def test_streaming_events():
         print("Events received:")
         final_output, events = consume_generator(generator)
 
-        # Verify we got expected event types
-        event_types = [e.event_type for e in events]
+        # Verify we got expected node updates
+        node_names = [
+            key
+            for update in events
+            if isinstance(update, tuple)
+            and len(update) == 2
+            and isinstance(update[1], dict)
+            for key in update[1].keys()
+        ]
 
         print(f"\nTotal events: {len(events)}")
-        print(f"Event types: {[et.value for et in event_types]}")
+        print(f"Node updates: {node_names}")
 
-        # Should have at least procedural_check event
-        has_procedural_check = EventType.PROCEDURAL_CHECK in event_types
+        # Should have at least procedural_check node update
+        has_procedural_check = "procedural_check" in node_names
         print(f"Has procedural_check event: {has_procedural_check}")
 
         # Close session
@@ -157,10 +171,8 @@ def test_conversation_flow():
                 print(f"  Halted: {final_output.was_halted}")
                 print(f"  Topic: {final_output.current_topic_name or 'None'}")
 
-                if final_output.generated_insight:
-                    print(
-                        f"  Insight: Yes ({final_output.generated_insight.get('type')})"
-                    )
+                for insight in final_output.generated_insights:
+                    print(f"  Insight: Yes ({insight.get('type')})")
 
         # Check final state
         print("\n--- Final State ---")

@@ -592,9 +592,9 @@ def main():
                             print(
                                 f"  Topic: {final_output.current_topic_name or 'None'}"
                             )
-                            if final_output.generated_insight:
-                                content = final_output.generated_insight.get(
-                                    "content", ""
+                            for insight in final_output.generated_insights:
+                                content = insight.get("content") or insight.get(
+                                    "explanation", ""
                                 )
                                 print(f"  Insight: {content[:100]}...")
                         print()
@@ -636,10 +636,8 @@ def main():
                     print("Status: Halted (procedural content)")
                 else:
                     print(f"Topic: {final_output.current_topic_name or 'None'}")
-                    if final_output.generated_insight:
+                    for insight in final_output.generated_insights:
+                        print(f"Insight Type: {insight.get('type')}")
                         print(
-                            f"Insight Type: {final_output.generated_insight.get('type')}"
-                        )
-                        print(
-                            f"Content: {final_output.generated_insight.get('content', '')}"
+                            f"Content: {insight.get('content') or insight.get('explanation', '')}"
                         )

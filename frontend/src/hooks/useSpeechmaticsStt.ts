@@ -352,7 +352,7 @@ export function useSpeechmaticsStt({
         } finally {
             startInFlightRef.current = false;
         }
-    }, [clearCaptionTimer, flushCurrentTurn]);
+    }, [flushCurrentTurn]);
 
     useEffect(() => {
         if (enabled) {

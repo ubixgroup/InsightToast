@@ -147,7 +147,7 @@ export default function SpeakerEnrollmentPage() {
         return () => { window.removeEventListener("popstate", onPopState); };
     }, [navigate, routeState]);
 
-    const speakerNames = routeState?.speakerNames ?? [];
+    const speakerNames = useMemo(() => routeState?.speakerNames ?? [], [routeState?.speakerNames]);
     const totalSpeakers = speakerNames.length;
     const allEnrolled = enrollments.every((e) => e.phase === "done");
     const currentEnrollment = enrollments[currentSpeakerIndex];
@@ -224,7 +224,7 @@ export default function SpeakerEnrollmentPage() {
             const message = err instanceof Error ? err.message : "Failed to start enrollment";
             updateEnrollment(idx, { phase: "error", error: message });
         }
-    }, [routeState, currentSpeakerIndex, currentSpeakerName, updateEnrollment]);
+    }, [routeState, currentSpeakerIndex, updateEnrollment]);
 
     const handleStopRecording = useCallback(() => {
         updateEnrollment(currentSpeakerIndex, { phase: "processing" });

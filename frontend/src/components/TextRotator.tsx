@@ -73,7 +73,14 @@ export function TextRotator({
 }: TextRotatorProps) {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [isVisible, setIsVisible] = useState(true);
+    const [prevTexts, setPrevTexts] = useState(texts);
     const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
+    if (prevTexts !== texts) {
+        setPrevTexts(texts);
+        setCurrentIndex(0);
+        setIsVisible(true);
+    }
 
     // Handle text rotation
     useEffect(() => {
@@ -98,12 +105,6 @@ export function TextRotator({
             }
         };
     }, [texts.length, intervalMs]);
-
-    // Reset index when texts change
-    useEffect(() => {
-        setCurrentIndex(0);
-        setIsVisible(true);
-    }, [texts]);
 
     if (texts.length === 0) return null;
 
