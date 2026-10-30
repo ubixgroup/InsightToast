@@ -1,5 +1,5 @@
 """
-Utility functions for the Insight Toast API.
+Utility functions for the InsightToast API.
 
 This module provides helper functions for data serialization, SSE formatting,
 logging, and payload transformation.

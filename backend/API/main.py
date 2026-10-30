@@ -72,7 +72,7 @@ async def lifespan(app: FastAPI):
     """
     # Startup
     print("=" * 80)
-    print("🚀 Insight Toast API Starting...")
+    print("🚀 InsightToast API Starting...")
     print("=" * 80)
     print(f"📝 API Documentation: http://127.0.0.1:4343/docs")
     print(f"📊 ReDoc: http://127.0.0.1:4343/redoc")
@@ -83,7 +83,7 @@ async def lifespan(app: FastAPI):
 
     # Shutdown
     print("\n" + "=" * 80)
-    print("👋 Insight Toast API Shutting Down...")
+    print("👋 InsightToast API Shutting Down...")
     print("=" * 80)
 
 
@@ -92,7 +92,7 @@ async def lifespan(app: FastAPI):
 # =============================================================================
 
 app = FastAPI(
-    title="Insight Toast API",
+    title="InsightToast API",
     version="0.1.0",
     lifespan=lifespan,
     docs_url="/docs",  # Swagger UI
@@ -191,7 +191,7 @@ def root() -> InfoResponse:
     Returns basic information about the API and links to documentation.
     """
     return InfoResponse(
-        name="Insight Toast API",
+        name="InsightToast API",
         version="0.1.0",
         description="Real-time multi-agentic RAG conversation processing",
         endpoints={

@@ -134,7 +134,7 @@ export default function ColocatedJoinPage() {
                         <Stack gap="2">
                             <Text fontSize="sm" color="fg.muted">Study condition</Text>
                             <HStack align="stretch" gap="3">
-                                <Tooltip content="Insight Toast" positioning={{ placement: "top" }}>
+                                <Tooltip content="InsightToast" positioning={{ placement: "top" }}>
                                     <Box
                                         as="button"
                                         flex="1"

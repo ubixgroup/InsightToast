@@ -240,7 +240,7 @@ function LandingPage() {
 
     return (
         <Frame
-            title="Insight Toast"
+            title="InsightToast"
             subtitle="Choose whether to run the static demo or the live interactive study flow."
         >
             <Stack gap="4">
@@ -395,7 +395,7 @@ function JoinPage() {
                         <Stack gap="2">
                             <Text fontSize="sm" color="fg.muted">Study condition</Text>
                             <HStack align="stretch" gap="3">
-                                <Tooltip content="Insight Toast" positioning={{ placement: "top" }}>
+                                <Tooltip content="InsightToast" positioning={{ placement: "top" }}>
                                     <Box
                                         as="button"
                                         flex="1"
