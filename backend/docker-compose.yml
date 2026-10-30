@@ -96,8 +96,12 @@ services:
         }
 
         retry_cmd 45 ollama list
-        retry_cmd 5 ollama pull ${OLLAMA_EMBEDDING_MODEL:-embeddinggemma:latest}
-        retry_cmd 5 ollama pull ${OLLAMA_MAIN_MODEL:-gemma3:12b}
+        if ! ollama list | grep -q "${OLLAMA_EMBEDDING_MODEL:-embeddinggemma:latest}"; then
+          retry_cmd 5 ollama pull ${OLLAMA_EMBEDDING_MODEL:-embeddinggemma:latest}
+        fi
+        if ! ollama list | grep -q "${OLLAMA_MAIN_MODEL:-gemma3:12b}"; then
+          retry_cmd 5 ollama pull ${OLLAMA_MAIN_MODEL:-gemma3:12b}
+        fi
     environment:
       OLLAMA_HOST: http://ollama:11434
     networks:

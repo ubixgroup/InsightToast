@@ -52,9 +52,10 @@ Then edit `.env`:
 
 | Variable | Required | Description |
 |---|---|---|
-| `GOOGLE_API_KEY` | Yes | Google Cloud API key for Gemini. |
+| `GOOGLE_API_KEY` | Yes | Google Cloud API key for Gemini (used by the RAG pipeline). |
 | `ADMIN_PASSWORD` | Yes | Password for admin endpoints, used to generate API keys. Change from the default. |
-| `FRONTEND_GOOGLE_API_KEY` | Yes, for the chat endpoint | Google Cloud API key used by `POST /v2/conversations/{id}/chat`. Can be the same value as `GOOGLE_API_KEY`. |
+| `FRONTEND_GOOGLE_API_KEY` | Yes, for `/chat` & `/explain` | Google Cloud API key used by `POST /v2/conversations/{id}/chat` and `/explain`. Can be the same value as `GOOGLE_API_KEY`. |
+| `GOOGLE_GENAI_USE_VERTEXAI` | No | Set to `true` to route Gemini calls through Vertex AI instead of Google AI Studio. Default: `false`. |
 | `LIVEKIT_API_KEY` / `LIVEKIT_API_SECRET` / `LIVEKIT_URL` | Yes, for frontend remote sessions | LiveKit credentials for video conferencing in remote interactive sessions (`/interactive/remote/*`). |
 | `DEEPGRAM_API_KEY` | Yes, for frontend remote sessions | Deepgram API key for live speech-to-text in remote interactive sessions (`/interactive/remote/*`). |
 | `SPEECHMATICS_API_KEY` | Yes, for frontend co-located sessions | Speechmatics API key for speaker voiceprint enrollment and diarized STT in co-located interactive sessions (`/interactive/colocated/*`). |
@@ -137,6 +138,8 @@ Authorization: Bearer sk_v2_...
 | `GET /v2/conversations/{id}/events` | SSE stream of real-time pipeline updates (topics, insights, visualizations) |
 | `POST /v2/conversations/{id}/chat` | Chat with the pipeline about the conversation |
 | `POST /v2/conversations/{id}/search` | Search the knowledge base directly |
+| `POST /v2/conversations/{id}/explain` | Generate a concise explanation for a selected text excerpt |
+| `POST /v2/conversations/{id}/insights/actions` | Apply shared insight curation actions (select, pin, archive) |
 
 For the complete endpoint reference, see `http://localhost:4343/docs`. `/v1` endpoints also exist for backward compatibility but are considered legacy; new integrations should use `/v2`. The [frontend](../frontend) provides the intended interactive client against this API.
 

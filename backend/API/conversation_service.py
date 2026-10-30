@@ -1415,7 +1415,12 @@ class ConversationAPIService:
                 detail="FRONTEND_GOOGLE_API_KEY is not configured",
             )
 
-        model_name = "gemini-flash-latest"
+        use_vertexai = os.getenv("GOOGLE_GENAI_USE_VERTEXAI", "").lower() in (
+            "true",
+            "1",
+            "yes",
+        )
+        model_name = "gemini-3.5-flash" if use_vertexai else "gemini-flash-latest"
         temperature = 0.2
         history = session.client_chat_histories.setdefault(client_id, [])
         prior_history = history[-40:]
@@ -1425,6 +1430,7 @@ class ConversationAPIService:
                 model=model_name,
                 temperature=temperature,
                 api_key=self._frontend_google_api_key,
+                vertexai=use_vertexai,
                 timeout=30,
             )
 
@@ -1541,13 +1547,21 @@ class ConversationAPIService:
                 detail="FRONTEND_GOOGLE_API_KEY is not configured",
             )
 
-        model_name = "gemini-flash-lite-latest"
+        use_vertexai = os.getenv("GOOGLE_GENAI_USE_VERTEXAI", "").lower() in (
+            "true",
+            "1",
+            "yes",
+        )
+        model_name = (
+            "gemini-3.5-flash-lite" if use_vertexai else "gemini-flash-lite-latest"
+        )
 
         def _invoke_explain() -> str:
             llm = ChatGoogleGenerativeAI(
                 model=model_name,
                 temperature=0.2,
                 api_key=self._frontend_google_api_key,
+                vertexai=use_vertexai,
                 timeout=15,
             )
             messages = [

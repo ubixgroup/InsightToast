@@ -51,8 +51,21 @@ class LLMFactory:
             else self.config.llm.gemini_temperature
         )
 
+        use_vertexai = os.getenv("GOOGLE_GENAI_USE_VERTEXAI", "").lower() in (
+            "true",
+            "1",
+            "yes",
+        )
+        if use_vertexai:
+            # Vertex AI publisher endpoints do not support AI Studio "-latest" aliases
+            vertex_alias_map = {
+                "gemini-flash-latest": "gemini-3.5-flash",
+                "gemini-flash-lite-latest": "gemini-3.5-flash-lite",
+            }
+            model = vertex_alias_map.get(model, model)
+
         print(
-            f"[LLM_FACTORY] Creating Gemini model='{model}', temperature={temp}, timeout=15s"
+            f"[LLM_FACTORY] Creating Gemini model='{model}', temperature={temp}, vertexai={use_vertexai}, timeout=15s"
         )
 
         # Handle thinking configuration based on model version
@@ -64,6 +77,7 @@ class LLMFactory:
                 temperature=temp,
                 thinking_level="minimal",
                 api_key=api_key,
+                vertexai=use_vertexai,
                 timeout=15,  # 15 second timeout to prevent long waits
             )
         else:
@@ -73,6 +87,7 @@ class LLMFactory:
                 temperature=temp,
                 thinking_budget=0,
                 api_key=api_key,
+                vertexai=use_vertexai,
                 timeout=15,  # 15 second timeout to prevent long waits
             )
 

@@ -988,26 +988,21 @@ def create_rag_pipeline(config: Optional[RAGConfig] = None) -> StateGraph:
                 (needed)              (not needed)
                       │                    │
                       ▼                    ▼
-          insight_query_constructor    complete ──► END
-                      │
-                      ▼
-          related_insight_finder
-                      │
-                      ▼
-              query_constructor
+              query_constructor          halt ──► END
                       │
             ┌─────────┴────────┐
             │                  │
         (queries)          (no queries)
             │                  │
             ▼                  ▼
-      ┌─────────────────────┐   complete ──► END
+      ┌─────────────────────┐   halt ──► END
       │ Retrieval Subgraph  │
       │    (per query)      │
       │                     │
       │ retriever_planner   │
-      │        │            │
-      │        ▼            │
+      │   │                 │
+      │   ├─(iter==0)───────┼─► EXIT SUBGRAPH
+      │   ▼                 │
       │ retriever_feedback  │
       │   │    │       │    │
       │   │    │       └────┼─► (proceed) ──► EXIT SUBGRAPH
@@ -1020,15 +1015,18 @@ def create_rag_pipeline(config: Optional[RAGConfig] = None) -> StateGraph:
               ▼                              │
         insight_selector                     │
               │                              │
-        ┌─────┴─────┐                        │
-        │           │                        │
-        ▼           ▼                        │
-    text_gen    viz_gen                      │
-        │           │                        │
-        └─────┬─────┘                        │
-              │                              │
-              ▼                              │
-            END ◄────────────────────────────┘
+        ┌─────┴───────────┐                  │
+        │                 │                  │
+        ▼                 ▼                  │
+    text_insight_gen  viz_planner            │
+        │                 │                  │
+        │                 ▼                  │
+        │           viz_generator            │
+        │                 │                  │
+        └────────┬────────┘                  │
+                 │                           │
+                 ▼                           │
+               END ◄─────────────────────────┘
     """
     # Set global config for verbose logging
     global _current_config
